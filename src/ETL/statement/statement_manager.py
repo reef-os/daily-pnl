@@ -15,10 +15,8 @@ class StatementManager:
     def start(self, local=False):
         if local:
             return pd.read_csv('data/bronze/statement.csv')
-        print("Starting statement ETL")
+        print("--- Starting statement ETL ---")
         df = self.__extractor.get_data()
-        print("Statement data extracted")
         transformed_df = Transformer.transform(df)
-        print("Statement data transformed")
-        print("Statement ETL completed")
+        print("--- Statement ETL completed ---")
         return transformed_df
