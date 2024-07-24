@@ -1,0 +1,31 @@
+Line Item,Line Order
+1.Marketplace Fee,L1-06
+Discount Usd,L1-02
+Gross Sales Usd,L1-01
+Net Sales Usd,L1-05
+Refund Usd,L1-03
+Royalty Usd,L1-11-01
+Vat Usd,L1-04
+"2.CWA Fee, net",L1-07
+Rent,L1-10-02
+Electricity,L1-12-02-01
+Fire/Safety,L1-12-02-02
+Fresh Water,L1-12-02-03
+"Fuel, Natural Gas & Propane",L1-12-02-04
+Grey Water,L1-12-02-05
+Insurance Expense,L1-12-02-06
+Internet Services,L1-12-02-07
+Repairs & Maintenance,L1-12-02-08
+Pest Control,L2-01-03-01
+Portable Toilets,L2-01-03-02
+Waste Management,L2-01-03-03
+Non-recurring Costs,L4-03-06
+(-)SG&A - Profession,L6-01-01
+(-)SG&A - People Cos,L6-02-01
+(-)SG&A - Insurance,L6-01-02
+(-)SG&A - Other,L6-01-03
+(-)Other Income & Ex,L6-01-04
+(-)SG&A - T&E,L6-01-05
+(-)SG&A Application,L6-01-06
+(-)SG&A - Utility Ex,L6-01-07
+(-)SG&A - Rent,L6-01-08
