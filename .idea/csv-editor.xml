@@ -3,14 +3,7 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="/data/bronze/coupa.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/data/bronze/coupa_second.csv">
+        <entry key="/data/bronze/first-data-pnl.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -24,28 +17,35 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/data/bronze/statement.csv">
+        <entry key="/data/bronze/pnl_orders_filtered.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="/data/gold/final.csv">
+        <entry key="/data/bronze/pnl_orders_grouped.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="/data/silver/merge_pnl_coupa.csv">
+        <entry key="/data/bronze/pnl_orders_melted.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="/mapping.csv">
+        <entry key="/grouped_df.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/static/coupa-updated-mapping-gl.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

@@ -25,11 +25,14 @@ class MergeManager:
             new_row['Amount'] = row['Amount']
             new_row['is_ulysses'] = ''
             new_row['delivery_platform'] = ''
-            line_order_value = df_mapping.loc[df_mapping['Main account'] == row['Gl Account'], 'x.1'].values
+            #line_order_value = df_mapping.loc[df_mapping['Main account'] == row['Gl Account'], 'x.1'].values
+            new_row['Line Order'] = row['Line Order']
+            """
             if len(line_order_value) > 0:
                 new_row['Line Order'] = line_order_value[0]
             else:
                 new_row['Line Order'] = None
+            """
             new_rows.append(new_row)
 
         new_df = pd.concat([df_pnl, pd.DataFrame(new_rows)], ignore_index=True)
