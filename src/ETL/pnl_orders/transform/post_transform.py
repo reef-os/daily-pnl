@@ -40,6 +40,7 @@ class PostTransformer:
         for index, row in filtered_df.iterrows():
             new_row = row.copy()
             new_row['Line Item'] = '(-)Food Purchases'
+            new_row['Line Order'] = 'L3-01-01'
             new_row['Amount'] = row['Amount'] * 0.30
             new_rows.append(new_row)
         new_df = pd.concat([df, pd.DataFrame(new_rows)], ignore_index=True)

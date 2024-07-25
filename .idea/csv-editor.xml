@@ -10,6 +10,34 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/data/bronze/old_first-data-pnl.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data/bronze/old_pnl_orders_filtered.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data/bronze/old_pnl_orders_grouped.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data/bronze/old_pnl_orders_melted.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/data/bronze/pnl.csv">
           <value>
             <Attribute>
@@ -32,6 +60,13 @@
           </value>
         </entry>
         <entry key="/data/bronze/pnl_orders_melted.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data/silver/pnl.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

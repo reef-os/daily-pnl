@@ -19,8 +19,6 @@ class PnlOrderManager:
             return pd.read_csv("data/bronze/pnl.csv")
         print("--- Starting PNL Orders ETL ---")
         df = self.__get_data()
-        #df.to_csv("data/bronze/first-data-pnl.csv")
         transformed_df = self.__transformer.start_transform(df)
         print("--- Finished PNL Orders ETL ---")
         return transformed_df
-    # TODO vessel_name gelmeyenleri çözelim.

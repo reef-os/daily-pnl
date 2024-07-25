@@ -46,14 +46,12 @@ class SpreadRHQ:
         country_vessel_counts = self.__prepare_country_dict(final_coupa_data)
 
         df_unique, grouped_df = self.prepare_dfs(final_coupa_data)
-        df_unique.to_csv('df_unique.csv')
-        grouped_df.to_csv('grouped_df.csv')
+
 
         for index, row in df_unique.iterrows():
             if not row['Vessel'].startswith('RHQ') and '-' in row['Vessel'] and not row['Vessel'].split('-')[1] in ['900', '000']:
                 filtered_df_2 = grouped_df[grouped_df['Business Date Local'] == row['Business Date Local']]
                 filtered_df_last = self.__preapre_rhq(filtered_df_2, mapping_df)
-                filtered_df_last.to_csv('filtered_df_last.csv')
                 if len(filtered_df_last) > 0:
                     for grouped_index, grouped_row in filtered_df_last.iterrows():
                         new_row = row.copy()
@@ -72,7 +70,6 @@ class SpreadRHQ:
 
         new_df = pd.DataFrame(new_rows)
         final_df = pd.concat([final_coupa_data, new_df], ignore_index=True)
-        final_df.to_csv('final_df.csv')
         print("Spread RHQ DONE!")
         return final_df
 

@@ -76,7 +76,8 @@ class LaborMapping:
                     new_rows.append(new_row)
 
         uniq_vessle_count = int(self.__get_unique_vessel_name(df_unique))
-        global_row = labor_mapping.loc[df['Country'] == 'Global']
+        #TODO vessel countlar sıkıntılı
+        global_row = labor_mapping[labor_mapping['Country'] == 'Global']
         for index, row in df_unique.iterrows():
             month = row['Business Date Local'].month
             if month == 4:
@@ -95,9 +96,9 @@ class LaborMapping:
                 new_row['Vessel Name'] = row['Vessel Name']
                 new_row['Business Date Local'] = row['Business Date Local']
                 new_row['Country'] = row['Country']
-                new_row['Line Item'] = global_row['Line_Item']
-                new_row['Amount'] = int(global_row[month_col]) / uniq_vessle_count
-                new_row['Line Order'] = global_row['Line']
+                new_row['Line Item'] = global_row['Line_Item'].iloc[0]
+                new_row['Amount'] = float(global_row[month_col].iloc[0] / uniq_vessle_count)
+                new_row['Line Order'] = global_row['Line_Order'].iloc[0]
                 new_rows.append(new_row)
 
         new_df = pd.DataFrame(new_rows)

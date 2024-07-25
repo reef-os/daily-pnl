@@ -26,7 +26,7 @@ class ETLManager:
         statement_df.to_csv("data/bronze/statement.csv")
 
         merge_pnl_coupa_df = self.__merge_manager.merge_pnl_coupa(pnl_df, coupa_df)
-        merge_pnl_coupa_df.to_csv("data/silver/merge_pnl_coupa.csv") #buraya kadar okay
+        merge_pnl_coupa_df.to_csv("data/silver/merge_pnl_coupa.csv")
 
         merged_df = self.__merge_manager.merge_statement_merged_data(merge_pnl_coupa_df, statement_df)
         merged_df.to_csv("data/silver/merge_statement_merged_data.csv")

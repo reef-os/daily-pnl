@@ -14,5 +14,8 @@ class MappingManager:
         df = self.__labor_mapping.start(df)
         df = self.__line_order_mapping.map_line_order_and_line_item(df)
         df = self.__multiply_negative_mapping.eksi_bir_carp(df)
+        df = df[df['Line Item'] != 'Commission Usd']
+        df = df[df['Amount'] != 0]
+        df = df[df['Line Order'] != 'Unnamed LineOrder']
         print("--- MappingManager finished. ---")
         return df

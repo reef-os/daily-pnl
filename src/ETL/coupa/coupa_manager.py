@@ -66,7 +66,5 @@ class CoupaManager:
         rhq_spreaded_df = self.__spread_rhq.spread_rhq(corporate_spreaded_df)
 
         final_df = self.final_mapping(rhq_spreaded_df)
-        #final_df.to_csv('data/bronze/final_coupa_mapped.csv')
-
         print("--- Finished Coupa ETL! ---")
         return final_df
