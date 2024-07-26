@@ -1,3 +1,6 @@
+import pandas as pd
+
+
 class Transformer:
     def __init__(self):
         pass
@@ -14,3 +17,10 @@ class Transformer:
             'vessel name': 'Vessel Name'
         })
         return renamed_df
+
+    @staticmethod
+    def map_pl_mapping4_to_line_order(df):
+        df_mapping = pd.read_csv('static/line_order_mapping.csv')
+        line_item_dict = dict(zip(df_mapping['pl_mapping_4'], df_mapping['Line Order']))
+        df['Line Order'] = df['Line Item'].map(line_item_dict)
+        return df

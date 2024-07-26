@@ -3,35 +3,7 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="/data/bronze/first-data-pnl.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/data/bronze/old_first-data-pnl.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/data/bronze/old_pnl_orders_filtered.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/data/bronze/old_pnl_orders_grouped.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/data/bronze/old_pnl_orders_melted.csv">
+        <entry key="/data/bronze/coupa.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -45,35 +17,49 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/data/bronze/pnl_orders_filtered.csv">
+        <entry key="/data/bronze/statement.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="/data/bronze/pnl_orders_grouped.csv">
+        <entry key="/data/gold/haziran_data.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="/data/bronze/pnl_orders_melted.csv">
+        <entry key="/data/gold/nisan_data.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="/data/silver/pnl.csv">
+        <entry key="/data/silver/merge_pnl_coupa.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="/grouped_df.csv">
+        <entry key="/data/silver/merge_statement_merged_data.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/first_df.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/second_df.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -81,6 +67,27 @@
           </value>
         </entry>
         <entry key="/static/coupa-updated-mapping-gl.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/static/eksi-ile-carp.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/static/labor_mapping.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/static/line_order_mapping.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

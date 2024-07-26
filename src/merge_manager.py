@@ -6,7 +6,7 @@ class MergeManager:
         pass
 
     def __fill_empty_cels(self, df):
-        df['Vessel Name'] = df['Vessel Name'].replace('', 'Unnamed Vessel').fillna('Unnamed Vessel')
+        df['Vessel Name'] = df['Vessel Name'].replace('', 'Unknown Vessel Name').fillna('Unknown Vessel Name')
         df['Country'] = df['Country'].replace('', 'Unknow Country').fillna('Unknow Country')
         return df
 
@@ -49,7 +49,7 @@ class MergeManager:
             new_row['Country'] = row['Country']
             new_row['Line Item'] = row['Line Item']
             new_row['Amount'] = row['Amount']
-            new_row['Line Order'] = ''
+            new_row['Line Order'] = row['Line Order']
 
             new_rows.append(new_row)
 

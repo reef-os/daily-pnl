@@ -45,9 +45,7 @@ class CoupaManager:
         mapping_df = pd.read_csv('static/coupa-updated-mapping-gl.csv')
         gl_account_to_line_order = mapping_df.set_index('Gl Acount')['Line Order'].to_dict()
 
-        coupa_df['Line Order'] = coupa_df.apply(
-            lambda row: gl_account_to_line_order.get(row['Gl Account'], row['Line Order']) if pd.isna(
-                row['Line Order']) else row['Line Order'],
+        coupa_df['Line Order'] = coupa_df.apply(lambda row: gl_account_to_line_order.get(row['Gl Account'], row['Line Order']) if pd.isna(row['Line Order']) else row['Line Order'],
             axis=1
         )
         return coupa_df

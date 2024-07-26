@@ -18,5 +18,6 @@ class StatementManager:
         print("--- Starting statement ETL ---")
         df = self.__extractor.get_data()
         transformed_df = Transformer.transform(df)
+        final_transformed_df = Transformer.map_pl_mapping4_to_line_order(transformed_df)
         print("--- Statement ETL completed ---")
-        return transformed_df
+        return final_transformed_df

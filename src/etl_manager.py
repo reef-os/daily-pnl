@@ -32,4 +32,4 @@ class ETLManager:
         merged_df.to_csv("data/silver/merge_statement_merged_data.csv")
 
         mapped_df = self.__mapping_manager.start(merged_df)
-        mapped_df.to_csv("data/gold/final_nisan.csv")
+        mapped_df.to_csv("data/gold/nisan_data.csv")

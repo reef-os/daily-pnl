@@ -32,8 +32,7 @@ class PrepareCorporate:
 
     @staticmethod
     def __select_relevant_columns(df):
-        columns = ['vessel_code', 'expense_level', 'order_date', 'account_category',
-                   'pnl_contribution_daily_usd_rounded', 'Business Date Local']
+        columns = ['vessel_code', 'expense_level', 'order_date', 'account_category','pnl_contribution_daily_usd_rounded', 'Business Date Local']
         return df[columns]
 
     @staticmethod
@@ -44,12 +43,14 @@ class PrepareCorporate:
         filtered_df = df[df['account_type'] == 'REEF Corporate']
         df_cleaned = filtered_df.dropna(subset=['account_category'])
         return df_cleaned
+
     def start_transform(self, df):
         print("Second Transform...")
         df_filtered = self.__filter_account_type(df)
         df_final = self.__select_relevant_columns(df_filtered)
         renamed_df = self.__rename_columns(df_final)
-        grouped_df = renamed_df.groupby(['Vessel', 'expense_level', 'order_date', 'Line Item', 'Business Date Local'],as_index=False).agg({'Amount': 'sum'})
+        grouped_df = renamed_df.groupby(['Vessel', 'expense_level', 'order_date', 'Line Item', 'Business Date Local'],
+                                        as_index=False).agg({'Amount': 'sum'})
         mapped_df = self.__line_order_mapping(grouped_df)
         print("Second Transform DONE!")
         return mapped_df

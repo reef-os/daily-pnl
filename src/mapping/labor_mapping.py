@@ -6,7 +6,7 @@ class LaborMapping:
         pass
 
     def __preapare_final_df(self, final_df):
-        final_df['Vessel Name'] = final_df['Vessel Name'].replace('', 'Unnamed Vessel').fillna('Unnamed Vessel')
+        final_df['Vessel Name'] = final_df['Vessel Name'].replace('', 'Unknown Vessel Name').fillna('Unknown Vessel Name')
         final_df['Line Order'] = final_df['Line Order'].replace('', 'Unnamed LineOrder').fillna('Unnamed LineOrder')
 
         final_df['Business Date Local'] = pd.to_datetime(final_df['Business Date Local']).dt.strftime('%Y-%m-%d')
