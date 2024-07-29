@@ -14,9 +14,6 @@ phases:
       - echo "BUILD PHASE IS BEGINNING"
       - aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
       - aws ecr describe-repositories --repository-names ${ECR_REPOSITORY} || aws ecr create-repository --repository-name ${ECR_REPOSITORY}
-      - echo "Listing current directory"
-      - ls -la  # Bu komut mevcut dizini listeler
-      - cd "${CODEBUILD_SRC_DIR}/daily-pnl"
       - docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
       - echo "BUILD PHASE IS OVER"
   post_build:
