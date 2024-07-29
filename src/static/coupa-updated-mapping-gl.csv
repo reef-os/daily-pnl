@@ -1,0 +1,93 @@
+﻿Gl Acount,Line Item,Line Order,Mapping 2,Mapping 3
+553210,L1 Expenses,L1-10-01,1. Residual Rent,(-)Paid to Landlord for used space
+610200,L3 Expenses,L3-03-01,2. Non People G&A,(-)Professional services
+537250,L3 Expenses,L3-03-01,2. Non People G&A,(-)Professional services
+519005,L1 Expenses,L1-13-01,4.Other,(-)Paid to Vendors
+519010,L1 Expenses,L1-13-01,4.Other,(-)Paid to Vendors
+610005,L4 Expenses,L4-02-01,2. Non People G&A,(-)Professional services
+611005,L4 Expenses,L4-02-01,2. Non People G&A,(-)Professional services
+507005,L1 Expenses,L1-12-01,3. Residual Utilities and R&M,(-)Paid to Vendors
+507010,L1 Expenses,L1-12-01,3. Residual Utilities and R&M,(-)Paid to Vendors
+534005,L3 Expenses,L3-01-02,"1. UG Costs , net",(-)Rent
+611015,L4 Expenses,L4-02-01,2. Non People G&A,(-)Professional services
+520040,L2 Expenses,L2-01-01,1. Residual Site Service,(-)Paid to Vendors
+515005,L1 Expenses,L1-12-01,3. Residual Utilities and R&M,(-)Paid to Vendors
+536040,L3 Expenses,L3-01-05,"1. UG Costs , net",(-)Other
+509005,L1 Expenses,L1-10-01,1. Residual Rent,(-)Paid to Landlord for used space
+610015,Non-recurring Costs,L4-03-06,(-)Idle Rent or Fleet,(-)Idle Rent or Fleet
+615040,Non-recurring Costs,L4-03-06,,
+519080,L1 Expenses,L1-12-01,3. Residual Utilities and R&M,(-)Paid to Vendors
+519070,L1 Expenses,L1-13-01,4.Other,(-)Paid to Vendors
+536030,L3 Expenses,L3-01-05,"1. UG Costs , net",(-)Other
+515010,L1 Expenses,L1-12-01,3. Residual Utilities and R&M,(-)Paid to Vendors
+535020,L3 Expenses,L3-01-04,"1. UG Costs , net",(-)Utilities and R&M
+515030,L1 Expenses,L1-12-01,3. Residual Utilities and R&M,(-)Paid to Vendors
+515040,L1 Expenses,L1-12-01,3. Residual Utilities and R&M,(-)Paid to Vendors
+536020,L3 Expenses,L3-01-04,"1. UG Costs , net",(-)Utilities and R&M
+535005,L3 Expenses,L3-01-04,"1. UG Costs , net",(-)Utilities and R&M
+520020,L2 Expenses,L2-01-01,1. Residual Site Service,(-)Paid to Vendors
+515011,L1 Expenses,L1-12-01,3. Residual Utilities and R&M,(-)Paid to Vendors
+537020,L3 Expenses,L3-02-02,"2. MM Costs , net",(-)Labor costs
+515015,L1 Expenses,L1-12-01,3. Residual Utilities and R&M,(-)Paid to Vendors
+611010,L4 Expenses,L4-02-01,2. Non People G&A,(-)Professional services
+601030,L4 Expenses,L4-01-01,1. People G&A,1. People G&A
+698010,(-)SG&A - Other,L6-01-03,,
+537255,L3 Expenses,L3-03-01,2. Non People G&A,(-)Professional services
+603050,L4 Expenses,L4-02-01,2. Non People G&A,(-)Professional services
+611025,L4 Expenses,L4-02-01,2. Non People G&A,(-)Professional services
+698055,(-)SG&A - Other,L6-01-03,,
+605020,L4 Expenses,L4-02-01,2. Non People G&A,(-)Professional services
+613020,L4 Expenses,L4-02-01,2. Non People G&A,(-)Professional services
+605030,L4 Expenses,L4-02-01,2. Non People G&A,(-)Professional services
+537210,L3 Expenses,L3-03-01,2. Non People G&A,(-)Professional services
+603035,L4 Expenses,L4-02-01,2. Non People G&A,(-)Professional services
+603075,L4 Expenses,L4-02-01,2. Non People G&A,(-)Professional services
+603045,L4 Expenses,L4-02-01,2. Non People G&A,(-)Professional services
+698025,(-)SG&A - Other,L6-01-03,,
+520030,L2 Expenses,L2-01-01,1. Residual Site Service,(-)Paid to Vendors
+536010,L3 Expenses,L3-01-05,"1. UG Costs , net",(-)Other
+698015,(-)SG&A - Other,L6-01-03,,
+535010,L3 Expenses,L3-01-04,"1. UG Costs , net",(-)Utilities and R&M
+537010,L3 Expenses,L3-02-03,"2. MM Costs , net",(-)Fuel
+615005,Non-recurring Costs,L4-03-06,,
+615015,Non-recurring Costs,L4-03-06,,
+610820,(-)SG&A - Other,L6-01-03,,
+519025,L1 Expenses,L1-13-01,4.Other,(-)Paid to Vendors
+537245,L3 Expenses,L3-01-05,"1. UG Costs , net",(-)Other
+537005,L3 Expenses,L3-02-01,"2. MM Costs , net",(-)Vehicle Lease/Rent
+604010,L1 Expenses,L1-12-01,3. Residual Utilities and R&M,(-)Paid to Vendors
+553120,L2 Expenses,L2-01-01,1. Residual Site Service,(-)Paid to Vendors
+536025,L3 Expenses,L3-01-05,"1. UG Costs , net",(-)Other
+613030,L4 Expenses,L4-02-01,2. Non People G&A,(-)Professional services
+610240,L4 Expenses,L4-02-01,2. Non People G&A,(-)Professional services
+520025,L2 Expenses,L2-01-01,1. Residual Site Service,(-)Paid to Vendors
+553110,L3 Expenses,L3-01-02,"1. UG Costs , net",(-)Rent
+535025,L3 Expenses,L3-01-04,"1. UG Costs , net",(-)Utilities and R&M
+537015,L3 Expenses,L3-02-04,"2. MM Costs , net",(-)Other
+520045,L2 Expenses,L2-01-01,1. Residual Site Service,(-)Paid to Vendors
+610010,L4 Expenses,L4-02-01,2. Non People G&A,(-)Professional services
+698065,(-)SG&A - Other,L6-01-03,,
+612060,(-)SG&A - Other,L6-01-03,,
+610390,(-)SG&A - Other,L6-01-03,,
+698050,(-)SG&A - Other,L6-01-03,,
+615030,Non-recurring Costs,L4-03-06,,
+606005,L4 Expenses,L4-02-02,2. Non People G&A,(-)T&E
+698060,(-)SG&A - Other,L6-01-03,,
+536045,L3 Expenses,L3-01-04,"1. UG Costs , net",(-)Utilities and R&M
+519060,L1 Expenses,L1-13-01,4.Other,(-)Paid to Vendors
+615025,Non-recurring Costs,L4-03-06,,
+698035,(-)SG&A - Other,L6-01-03,,
+614005,Non-recurring Costs,L4-03-06,,
+519015,L1 Expenses,L1-13-01,4.Other,(-)Paid to Vendors
+601050,L4 Expenses,L4-01-01,1. People G&A,1. People G&A
+605005,L4 Expenses,L4-02-01,2. Non People G&A,(-)Professional services
+615035,Non-recurring Costs,L4-03-06,,
+613015,L4 Expenses,L4-02-01,2. Non People G&A,(-)Professional services
+520005,L2 Expenses,L2-01-01,1. Residual Site Service,(-)Paid to Vendors
+537230,L3 Expenses,L3-03-01,2. Non People G&A,(-)Professional services
+605035,L4 Expenses,L4-02-01,2. Non People G&A,(-)Professional services
+536015,L3 Expenses,L3-01-05,"1. UG Costs , net",(-)Other
+515020,L1 Expenses,L1-12-01,3. Residual Utilities and R&M,(-)Paid to Vendors
+537260,L3 Expenses,L3-03-01,2. Non People G&A,(-)Professional services
+537240,L3 Expenses,L3-03-01,2. Non People G&A,(-)Professional services
+519006,L1 Expenses,L1-13-01,4.Other,(-)Paid to Vendors

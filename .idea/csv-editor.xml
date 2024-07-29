@@ -3,6 +3,20 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="/1-coupa.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/2-coupa.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/data/bronze/coupa.csv">
           <value>
             <Attribute>
@@ -24,6 +38,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/data/gold/final_data.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/data/gold/haziran_data.csv">
           <value>
             <Attribute>
@@ -31,7 +52,21 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/data/gold/mayis_data.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/data/gold/nisan_data.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/data/gold/temmuz_data.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -46,20 +81,6 @@
           </value>
         </entry>
         <entry key="/data/silver/merge_statement_merged_data.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/first_df.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/second_df.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

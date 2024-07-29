@@ -1,0 +1,49 @@
+Line Order,Line Item,pl_mapping_2,pl_mapping_3,pl_mapping_4
+L1-01,Gross Sales Usd,,,
+L1-02,Discount Usd,,,
+L1-03,Refund Usd,,,
+L1-04,Vat Usd,,,
+L1-05,Net Sales Usd,,,
+L1-06,1.Marketplace Fee,,,
+L1-07,"2.CWA Fee, net",,,
+L1-10-01,L1 Expenses,1. Residual Rent,(-)Paid to Landlord for used space,
+L1-10-02,L1 Expenses,1. Residual Rent,(+)charges to Ulysses,Rent
+L1-11-01,Royalty Usd,2. Residual Content Royalty,(-)Paid to Content Providers,
+L1-12-01,L1 Expenses,3. Residual Utilities and R&M,(-)Paid to Vendors,
+L1-12-02-01,L1 Expenses,3. Residual Utilities and R&M,(+)charges to Ulysses,Electricity
+L1-12-02-02,L1 Expenses,3. Residual Utilities and R&M,(+)charges to Ulysses,Fire/Safety
+L1-12-02-03,L1 Expenses,3. Residual Utilities and R&M,(+)charges to Ulysses,Fresh Water
+L1-12-02-04,L1 Expenses,3. Residual Utilities and R&M,(+)charges to Ulysses,"Fuel, Natural Gas & Propane"
+L1-12-02-05,L1 Expenses,3. Residual Utilities and R&M,(+)charges to Ulysses,Grey Water
+L1-12-02-06,L1 Expenses,3. Residual Utilities and R&M,(+)charges to Ulysses,Insurance Expense
+L1-12-02-07,L1 Expenses,3. Residual Utilities and R&M,(+)charges to Ulysses,Internet Services
+L1-12-02-08,L1 Expenses,3. Residual Utilities and R&M,(+)charges to Ulysses,Repairs & Maintenance
+L1-13-01,L1 Expenses,4.Other,(-)Paid to Vendors,
+L1-14-01,L1 Expenses,(-)Labor Cost,,
+L2-01-01,L2 Expenses,1. Residual Site Service,(-)Paid to Vendors,
+L2-01-03-01,L2 Expenses,1. Residual Site Service,(+)charges to Ulysses,Pest Control
+L2-01-03-02,L2 Expenses,1. Residual Site Service,(+)charges to Ulysses,Portable Toilets
+L2-01-03-03,L2 Expenses,1. Residual Site Service,(+)charges to Ulysses,Waste Management
+L3-01-01,L3 Expenses,"1. UG Costs , net",(-)Food Purchases,
+L3-01-02,L3 Expenses,"1. UG Costs , net",(-)Rent,
+L3-01-04,L3 Expenses,"1. UG Costs , net",(-)Utilities and R&M,
+L3-01-05,L3 Expenses,"1. UG Costs , net",(-)Other,
+L3-01-06,L3 Expenses,"1. UG Costs , net",(+)charges to Ulysses,
+L3-02-01,L3 Expenses,"2. MM Costs , net",(-)Vehicle Lease/Rent,
+L3-02-02,L3 Expenses,"2. MM Costs , net",(-)Labor costs,
+L3-02-03,L3 Expenses,"2. MM Costs , net",(-)Fuel,
+L3-03-01,L3 Expenses,3. Non People G&A,,
+L3-03-02,L3 Expenses,(-)Labor costs,,
+L4-01-01,L4 Expenses,1. People G&A,,
+L4-02-01,L4 Expenses,2. Non People G&A,(-)Professional services,
+L4-02-02,L4 Expenses,2. Non People G&A,(-)T&E,
+L4-03-06,L4 Expenses,Non-recurring Costs,(-)Closing Other Cost,
+L6-01-01,L6 Expenses,(-)Non - People G&A,(-)SG&A - Profession,
+L6-01-02,L6 Expenses,(-)Non - People G&A,(-)SG&A - Insurance,
+L6-01-03,L6 Expenses,(-)Non - People G&A,(-)SG&A - Other,
+L6-01-04,L6 Expenses,(-)Non - People G&A,(-)Other Income & Ex,
+L6-01-05,L6 Expenses,(-)Non - People G&A,(-)SG&A - T&E,
+L6-01-06,L6 Expenses,(-)Non - People G&A,(-)SG&A Application,
+L6-01-07,L6 Expenses,(-)Non - People G&A,(-)SG&A - Utility Ex,
+L6-01-08,L6 Expenses,(-)Non - People G&A,(-)SG&A - Rent,
+L6-02-01,L6 Expenses,(-)People G&A,(-)SG&A - People Cos,
