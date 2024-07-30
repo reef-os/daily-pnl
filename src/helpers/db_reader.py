@@ -15,7 +15,7 @@ class DbReader:
         return data
 
     def get_data(self, filename: str, start_date: str = None, end_date: str = None) -> pd.DataFrame:
-        with open(f"src/sql/{filename}.sql", 'r', encoding='utf-8') as f:
+        with open(f"sql/{filename}.sql", 'r', encoding='utf-8') as f:
             sql = f.read()
             if end_date is None:
                 sql = sql.format(start_date=start_date)
