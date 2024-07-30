@@ -1,10 +1,5 @@
-import sys
 import os
-
-print("PYTHONPATH:", sys.path)
-print("Current Working Directory:", os.getcwd())
-print("Contents of /usr/src:", os.listdir('/usr/src'))
-
+import sys
 import time
 import pandas as pd
 from coupa import start_coupa
@@ -26,7 +21,7 @@ def concat_dfs(df1, df2, df3):
 
 
 def eksi_ile_carp(df):
-    df2 = pd.read_csv('src/static/eksi-ile-carp.csv')
+    df2 = pd.read_csv('static/eksi-ile-carp.csv')
     df2_filtered = df2[df2['Check'] == 'Yes']
     line_orders_to_update = df2_filtered['Line Order'].unique()
     df.loc[df['Line Order'].isin(line_orders_to_update), 'Amount'] *= -1
@@ -48,7 +43,7 @@ def spread_labor(df):
     df['Business Date Local'] = pd.to_datetime(df['Business Date Local']).dt.strftime('%Y-%m-%d')
     df['Business Date Local'] = pd.to_datetime(df['Business Date Local'])
     ### LABOR DAGITMA ###
-    labor_mapping = pd.read_csv('src/static/labor_mapping.csv')
+    labor_mapping = pd.read_csv('static/labor_mapping.csv')
     labor_mapping['Apr'] = labor_mapping['Apr'].str.replace(',', '').astype(float)
     labor_mapping['May'] = labor_mapping['May'].str.replace(',', '').astype(float)
     labor_mapping['Jun'] = labor_mapping['Jun'].str.replace(',', '').astype(float)
@@ -133,47 +128,34 @@ def spread_labor(df):
 
 
 def start(merged_df):
-    #df = pd.read_csv("data/gold/concat.csv")
     df = spread_labor(merged_df)
     print("Labor spreaded")
     df = find_vessels_name(df)
     print("Vessels name found")
     df = eksi_ile_carp(df)
     print("Eksi ile carpildi")
-    #df.to_csv("data/gold/haziran_data.csv", index=False)
     return df
 
 
 def get_all():
     yesterday = datetime.today() - timedelta(days=1)
     yesterday_str = yesterday.strftime('%Y-%m-%d')
+    print("yesterday_str: ", yesterday_str)
 
     df_coupa = start_coupa("2024-06-01", "2024-06-30")
+    print("len(df_coupa): ", len(df_coupa))
     df_pnl = start_pnl_orders("2024-06-01", "2024-06-30")
+    print("len(df_pnl): ", len(df_pnl))
     df_statement = start_statement("2024-06-01", "2024-06-30")
+    print("len(df_statement): ", len(df_statement))
 
     merged_df = concat_dfs(df_coupa, df_pnl, df_statement)
+    print("len(merged_df): ", len(merged_df))
 
     final_df = start(merged_df)
     return final_df
 
 
-def merge_with_chunk():
-    chunksize = 100000
-    result = pd.DataFrame()
-
-    for chunk in pd.read_csv("data/gold/nisan_data.csv", chunksize=chunksize):
-        result = pd.concat([result, chunk], ignore_index=True)
-
-    for chunk in pd.read_csv("data/gold/mayis_data.csv", chunksize=chunksize):
-        result = pd.concat([result, chunk], ignore_index=True)
-
-    for chunk in pd.read_csv("data/gold/haziran_data.csv", chunksize=chunksize):
-        result = pd.concat([result, chunk], ignore_index=True)
-
-    # Birleştirilmiş dosyayı kaydedelim
-    result.to_csv("data/data2.csv", index=False)
-
-
 if __name__ == "__main__":
     print("Started")
+    get_all()

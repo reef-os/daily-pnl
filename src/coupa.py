@@ -121,7 +121,7 @@ def start_coupa(start_date_str, end_date_str):
     ### SPREAD CORPORATE END ###
 
     ### SPREAD RHQ START ###
-    mapping_df = pd.read_csv('src/static/coupa-updated-mapping-gl.csv')
+    mapping_df = pd.read_csv('static/coupa-updated-mapping-gl.csv')
     final_coupa_data = corporate_spreaded_df[corporate_spreaded_df['Country'].isin(['US', 'GB', 'AE', 'CA'])]
     us_vessels = final_coupa_data[final_coupa_data['Country'] == 'US']
     ca_vessels = final_coupa_data[final_coupa_data['Country'] == 'CA']
@@ -175,7 +175,7 @@ def start_coupa(start_date_str, end_date_str):
     rhq_spreaded_df = pd.concat([final_coupa_data, pd.DataFrame(new_rows)], ignore_index=True)
 
     coupa_df = rhq_spreaded_df[~rhq_spreaded_df['Vessel'].str.startswith('RHQ')]
-    mapping_df = pd.read_csv('src/static/coupa-updated-mapping-gl.csv')
+    mapping_df = pd.read_csv('static/coupa-updated-mapping-gl.csv')
     gl_account_to_line_order = mapping_df.set_index('Gl Acount')['Line Order'].to_dict()
 
     coupa_df['Line Order'] = coupa_df.apply(
@@ -185,7 +185,7 @@ def start_coupa(start_date_str, end_date_str):
     coupa_df.drop(columns=['start_date', 'end_date', 'Gl Account'], inplace=True)
 
     ## mapping
-    df_mapping = pd.read_csv('src/static/line_order_mapping.csv')
+    df_mapping = pd.read_csv('static/line_order_mapping.csv')
 
     line_order_to_item = dict(zip(df_mapping['Line Order'], df_mapping['Line Item']))
 

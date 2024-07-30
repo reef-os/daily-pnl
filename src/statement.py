@@ -15,7 +15,7 @@ def start_statement(start_date_str, end_date_str):
         'vessel name': 'Vessel Name'
     })
 
-    df_mapping = pd.read_csv('src/static/line_order_mapping.csv')
+    df_mapping = pd.read_csv('static/line_order_mapping.csv')
     ### Line Item -> Pl Mapping
     line_item_dict = dict(zip(df_mapping['pl_mapping_4'], df_mapping['Line Order']))
     renamed_df['Line Order'] = renamed_df['Line Item'].map(line_item_dict)
