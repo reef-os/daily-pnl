@@ -1,3 +1,10 @@
+import sys
+import os
+
+print("PYTHONPATH:", sys.path)
+print("Current Working Directory:", os.getcwd())
+print("Contents of /usr/src:", os.listdir('/usr/src'))
+
 import time
 import pandas as pd
 from src.coupa import start_coupa
