@@ -17,4 +17,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src/ /usr/src
 
-ENV PYTHONPATH "${PYTHONPATH}:/usr/src"
+ENV PYTHONPATH "/usr/src"
