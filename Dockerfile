@@ -18,3 +18,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY src/ /usr/src
 
 ENV PYTHONPATH "/usr/src"
+
+RUN echo "Contents of /usr/src:" && ls -l /usr/src
+RUN echo "PYTHONPATH is set to: $PYTHONPATH"
