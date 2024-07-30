@@ -50,18 +50,34 @@ def apply_l3_expenses(df):
     filtered_df = df[(df['Line Item'] == '(-)Food Purchases')]
     new_rows = []
     for index, row in filtered_df.iterrows():
-        new_row = row.copy()
-        new_row['Line Item'] = 'Food Charged L3'
-        new_row['Line Order'] = 'L3-01-06'
-        new_row['Amount'] = row['Amount'] * 1.10
-        new_rows.append(new_row)
+        if row['is_ulysses'] == True:
+            new_row = row.copy()
+            new_row['Line Item'] = 'Food Charged L3'
+            new_row['Line Order'] = 'L3-01-06'
+            new_row['Amount'] = row['Amount'] * 1.10
+            new_rows.append(new_row)
     new_df = pd.concat([df, pd.DataFrame(new_rows)], ignore_index=True)
     return new_df
 
 
+def drop_commisionusd_ulysses(df):
+    filtered_df = df[~((df['Line Item'] == 'Commission Usd') & (df['is_ulysses'] == True))]
+    return filtered_df
+
+
+def adjust_gross_sales_amount(group):
+    vat_usd_amount = group[group['Line Item'] == 'Vat Usd']['Amount'].sum()
+    gross_sales_usd_index = group[group['Line Item'] == 'Gross Sales Usd'].index
+
+    if not gross_sales_usd_index.empty:
+        group.loc[gross_sales_usd_index, 'Amount'] -= vat_usd_amount
+
+    return group
+
+
 def start_pnl_orders(start_date_str, end_date_str):
     db_reader = DbReader()
-    df = db_reader.get_data("pnl_orders",start_date_str, end_date_str)
+    df = db_reader.get_data("pnl_orders", start_date_str, end_date_str)
     df = df[['vessel', 'vessel_name', 'business_date_local', 'country', 'gross_sales_usd', 'discount_usd', 'refund_usd',
              'vat_usd', 'net_sales_usd', 'commission_usd', 'royalty_usd', 'is_ulysses', 'delivery_platform']]
 
@@ -109,11 +125,15 @@ def start_pnl_orders(start_date_str, end_date_str):
     df_cwa = apply_cwa_fee(df_fee)
     df_food = apply_food_purchases(df_cwa)
     df_final = apply_l3_expenses(df_food)
-    df_final.drop(columns=['is_ulysses', 'delivery_platform'], inplace=True)
-    #df_final = df_final[df_final['Vessel'] == 'MIA-009-07']
+    df_final.drop(columns=['delivery_platform'], inplace=True)
+    df_grouped = df_final.groupby(
+        ['Vessel', 'Vessel Name', 'Business Date Local', 'Country', 'Line Item', 'is_ulysses', 'Line Order'],
+        as_index=False).agg({'Amount': 'sum'})
 
-    #df_final.to_csv('data/pnl_orders.csv', index=False)
-    return df_final
+    df = drop_commisionusd_ulysses(df_grouped)
 
-
-#start_pnl_orders()
+    adjusted_df = df.groupby(['Vessel', 'Vessel Name', 'Business Date Local'], group_keys=False).apply(
+        adjust_gross_sales_amount)
+    final_df = adjusted_df[adjusted_df['Line Item'] != 'Vat Usd']
+    final_df.drop(columns=['is_ulysses'], inplace=True)
+    return final_df

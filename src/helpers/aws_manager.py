@@ -1,6 +1,5 @@
 import boto3
-import pandas as pd
-from io import StringIO
+import awswrangler as wr
 
 
 class AWSManager:
@@ -17,3 +16,23 @@ class AWSManager:
                 region_name=self.__region_name
             )
         return self.__session
+
+    def insert_to_redshift(self, df):
+        session = self.get_aws_session()
+        secret_name = "/timemachine/dev/datawarehouse/credentials"
+        schema = 'finance'
+        table_name = 'daily_pnl'
+
+        conn = wr.redshift.connect(
+            secret_id=secret_name,
+            boto3_session=session
+        )
+
+        wr.redshift.to_sql(
+            df=df,
+            con=conn,
+            table=table_name,
+            schema=schema,
+            mode='append',
+            index=False
+        )

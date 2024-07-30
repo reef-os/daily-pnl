@@ -2,15 +2,46 @@ import pandas as pd
 from ETL.coupa.extract.extractor import Extractor
 
 
+def spread_msa(df):
+    back_up_df = df
+    new_rows = []
+
+    unique_df = df.drop_duplicates(subset=['Vessel', 'Business Date Local']).sort_values(
+        by=['Vessel', 'Business Date Local'])
+    dagitilacak_df = df[df['Vessel'].str.contains('-900-|000')]
+    df = unique_df[~unique_df['Vessel'].str.contains('-900-|000')]
+    df_country_spesific = df[(df['Country'] == 'US') | (df['Country'] == 'CA')]
+
+    for index, row in df_country_spesific.iterrows():
+        matching_df = dagitilacak_df[dagitilacak_df['Vessel'].str[:3] == row['Vessel'][:3]]
+
+        if not matching_df.empty:
+            matching_df = matching_df[matching_df['Business Date Local'] == row['Business Date Local']]
+            if not matching_df.empty:
+                for _index, _row in matching_df.iterrows():
+                    new_row = row.copy()
+                    unique_vessels_count = df[df['Vessel'].str[:3] == row['Vessel'][:3]]['Vessel'].nunique()
+                    if unique_vessels_count == 0:
+                        unique_vessels_count = 1
+                    new_row['Line Item'] = _row['Line Item']
+                    new_row['Business Date Local'] = row['Business Date Local']
+                    new_row['Amount'] = _row['Amount'] / unique_vessels_count
+                    new_row['Line Order'] = _row['Line Order']
+                    new_rows.append(new_row)
+
+    df_final = pd.concat([back_up_df, pd.DataFrame(new_rows)], ignore_index=True)
+    return df_final
+
+
 def start_coupa(start_date_str, end_date_str):
-    extractor = Extractor(start_date_str,end_date_str)
+    extractor = Extractor(start_date_str, end_date_str)
     df_original = extractor.get_data()
 
     ### TRANSFORM START ###
     first_account_type_idx = df_original.columns.get_loc('account_type')
     df = df_original.loc[:, ~((df_original.columns == 'account_type') & (
-                df_original.columns.duplicated(keep='first') | (
-                    df_original.columns.get_loc('account_type') != first_account_type_idx)))]
+            df_original.columns.duplicated(keep='first') | (
+            df_original.columns.get_loc('account_type') != first_account_type_idx)))]
     df['country'].fillna(df['account_type'], inplace=True)
 
     country_mapping = {
@@ -52,8 +83,8 @@ def start_coupa(start_date_str, end_date_str):
 
     first_account_type_idx = df_setted_country.columns.get_loc('account_type')
     corporate_df = df_setted_country.loc[:, ~((df.columns == 'account_type') & (
-                df_setted_country.columns.duplicated(keep='first') | (
-                    df_setted_country.columns.get_loc('account_type') != first_account_type_idx)))]
+            df_setted_country.columns.duplicated(keep='first') | (
+            df_setted_country.columns.get_loc('account_type') != first_account_type_idx)))]
     corporate_df = corporate_df[corporate_df['account_type'] == 'REEF Corporate']
     corporate_df = corporate_df.dropna(subset=['account_category'])
 
@@ -190,10 +221,6 @@ def start_coupa(start_date_str, end_date_str):
     line_order_to_item = dict(zip(df_mapping['Line Order'], df_mapping['Line Item']))
 
     coupa_df['Line Item'] = coupa_df['Line Order'].map(line_order_to_item).fillna(coupa_df['Line Item'])
-    return coupa_df
-
-
-    #coupa_df.to_csv('data/coupa.csv', index=False)
-
-
-#start_coupa()
+    coupa_df = spread_msa(coupa_df)
+    df_final = coupa_df[~coupa_df['Vessel'].str.contains('-900-|-000-')]
+    return df_final

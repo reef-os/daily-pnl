@@ -1,11 +1,32 @@
-import os
-import sys
-import time
 import pandas as pd
 from coupa import start_coupa
 from pnl_orders import start_pnl_orders
 from statement import start_statement
 from datetime import datetime, timedelta
+import warnings
+
+warnings.filterwarnings('ignore')
+
+
+def pl_mapping(df):
+    df_mapping = pd.read_csv('static/line_order_mapping.csv')
+    df['pl_mapping_2'] = ''
+    df['pl_mapping_3'] = ''
+    df['pl_mapping_4'] = ''
+
+    line_item_dict_pl_2 = dict(zip(df_mapping['Line Order'], df_mapping['pl_mapping_2']))
+    df['pl_mapping_2'] = df['Line Order'].map(line_item_dict_pl_2)
+
+    line_item_dict_pl_3 = dict(zip(df_mapping['Line Order'], df_mapping['pl_mapping_3']))
+    df['pl_mapping_3'] = df['Line Order'].map(line_item_dict_pl_3)
+
+    line_item_dict_pl_4 = dict(zip(df_mapping['Line Order'], df_mapping['pl_mapping_4']))
+    df['pl_mapping_4'] = df['Line Order'].map(line_item_dict_pl_4)
+
+    df['pl_mapping_2'] = df['pl_mapping_2'].astype(str)
+    df['pl_mapping_3'] = df['pl_mapping_3'].astype(str)
+    df['pl_mapping_4'] = df['pl_mapping_4'].astype(str)
+    return df
 
 
 def concat_dfs(df1, df2, df3):
@@ -134,28 +155,30 @@ def start(merged_df):
     print("Vessels name found")
     df = eksi_ile_carp(df)
     print("Eksi ile carpildi")
+    df = pl_mapping(df)
+    print("PL Mapping done")
     return df
 
 
-def get_all():
-    yesterday = datetime.today() - timedelta(days=1)
-    yesterday_str = yesterday.strftime('%Y-%m-%d')
-    print("yesterday_str: ", yesterday_str)
-
-    df_coupa = start_coupa("2024-06-01", "2024-06-30")
+def get_all(yesterday_str):
+    df_coupa = start_coupa(yesterday_str, yesterday_str)
     print("len(df_coupa): ", len(df_coupa))
-    df_pnl = start_pnl_orders("2024-06-01", "2024-06-30")
+    df_pnl = start_pnl_orders(yesterday_str, yesterday_str)
     print("len(df_pnl): ", len(df_pnl))
-    df_statement = start_statement("2024-06-01", "2024-06-30")
+    df_statement = start_statement(yesterday_str, yesterday_str)
     print("len(df_statement): ", len(df_statement))
 
     merged_df = concat_dfs(df_coupa, df_pnl, df_statement)
     print("len(merged_df): ", len(merged_df))
 
     final_df = start(merged_df)
+    print("len(final_df): ", len(final_df))
     return final_df
 
 
 if __name__ == "__main__":
     print("Started")
-    get_all()
+    yesterday = datetime.today() - timedelta(days=1)
+    yesterday_str = yesterday.strftime('%Y-%m-%d')
+
+    df = get_all(yesterday_str)
