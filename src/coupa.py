@@ -1,5 +1,5 @@
 import pandas as pd
-from src.ETL.coupa.extract.extractor import Extractor
+from ETL.coupa.extract.extractor import Extractor
 
 
 def start_coupa(start_date_str, end_date_str):

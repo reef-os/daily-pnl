@@ -1,6 +1,6 @@
 import pandas as pd
 from datetime import datetime, timedelta
-from src.helpers.db_reader import DbReader
+from helpers.db_reader import DbReader
 
 
 class Extractor:

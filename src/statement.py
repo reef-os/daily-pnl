@@ -1,5 +1,5 @@
 import pandas as pd
-from src.ETL.statement.extract.extractor import Extractor
+from ETL.statement.extract.extractor import Extractor
 
 
 def start_statement(start_date_str, end_date_str):

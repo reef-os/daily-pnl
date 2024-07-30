@@ -7,9 +7,9 @@ print("Contents of /usr/src:", os.listdir('/usr/src'))
 
 import time
 import pandas as pd
-from src.coupa import start_coupa
-from src.pnl_orders import start_pnl_orders
-from src.statement import start_statement
+from coupa import start_coupa
+from pnl_orders import start_pnl_orders
+from statement import start_statement
 from datetime import datetime, timedelta
 
 
