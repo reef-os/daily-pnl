@@ -36,3 +36,4 @@ class AWSManager:
             mode='append',
             index=False
         )
+        print(f"Data inserted to Redshift. Schema: {schema}, Table: {table_name}")

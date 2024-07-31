@@ -60,8 +60,6 @@ def find_vessels_name(df):
 
 
 def spread_labor(df):
-    df['Vessel Name'] = df['Vessel Name'].replace('', 'Unknown Vessel Name').fillna('Unknown Vessel Name')
-    df['Line Order'] = df['Line Order'].replace('', 'Unnamed LineOrder').fillna('Unnamed LineOrder')
     df['Business Date Local'] = pd.to_datetime(df['Business Date Local']).dt.strftime('%Y-%m-%d')
     df['Business Date Local'] = pd.to_datetime(df['Business Date Local'])
     ### LABOR DAGITMA ###
@@ -150,9 +148,11 @@ def spread_labor(df):
 
 
 def start(merged_df):
-    #df = spread_labor(merged_df)
+    merged_df['Vessel Name'] = merged_df['Vessel Name'].replace('', 'Unknown Vessel Name').fillna('Unknown Vessel Name')
+    merged_df['Line Order'] = merged_df['Line Order'].replace('', 'Unnamed LineOrder').fillna('Unnamed LineOrder')
+    df = spread_labor(merged_df)
     print("Labor spreaded")
-    df = find_vessels_name(merged_df)
+    df = find_vessels_name(df)
     print("Vessels name found")
     df = eksi_ile_carp(df)
     print("Eksi ile carpildi")
