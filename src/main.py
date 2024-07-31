@@ -3,6 +3,7 @@ from coupa import start_coupa
 from pnl_orders import start_pnl_orders
 from statement import start_statement
 from datetime import datetime, timedelta
+from helpers import aws_manager
 import warnings
 
 warnings.filterwarnings('ignore')
@@ -149,9 +150,9 @@ def spread_labor(df):
 
 
 def start(merged_df):
-    df = spread_labor(merged_df)
+    #df = spread_labor(merged_df)
     print("Labor spreaded")
-    df = find_vessels_name(df)
+    df = find_vessels_name(merged_df)
     print("Vessels name found")
     df = eksi_ile_carp(df)
     print("Eksi ile carpildi")
@@ -177,8 +178,10 @@ def get_all(yesterday_str):
 
 
 if __name__ == "__main__":
-    print("Started")
     yesterday = datetime.today() - timedelta(days=1)
     yesterday_str = yesterday.strftime('%Y-%m-%d')
+    print("Started: ", yesterday_str)
+    aws_manager = aws_manager.AWSManager()
 
     df = get_all(yesterday_str)
+    aws_manager.insert_to_redshift(df)
