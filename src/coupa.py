@@ -6,8 +6,7 @@ def spread_msa(df):
     back_up_df = df
     new_rows = []
 
-    unique_df = df.drop_duplicates(subset=['Vessel', 'Business Date Local']).sort_values(
-        by=['Vessel', 'Business Date Local'])
+    unique_df = df.drop_duplicates(subset=['Vessel', 'Business Date Local']).sort_values(by=['Vessel', 'Business Date Local'])
     dagitilacak_df = df[df['Vessel'].str.contains('-900-|000')]
     df = unique_df[~unique_df['Vessel'].str.contains('-900-|000')]
     df_country_spesific = df[(df['Country'] == 'US') | (df['Country'] == 'CA')]
@@ -19,10 +18,8 @@ def spread_msa(df):
             matching_df = matching_df[matching_df['Business Date Local'] == row['Business Date Local']]
             if not matching_df.empty:
                 for _index, _row in matching_df.iterrows():
+                    unique_vessels_count = df[df['Vessel'].str[:3] == row['Vessel'][:3]]['Vessel'].nunique() or 1
                     new_row = row.copy()
-                    unique_vessels_count = df[df['Vessel'].str[:3] == row['Vessel'][:3]]['Vessel'].nunique()
-                    if unique_vessels_count == 0:
-                        unique_vessels_count = 1
                     new_row['Line Item'] = _row['Line Item']
                     new_row['Business Date Local'] = row['Business Date Local']
                     new_row['Amount'] = _row['Amount'] / unique_vessels_count
@@ -212,7 +209,6 @@ def start_coupa(start_date_str, end_date_str):
     coupa_df['Line Order'] = coupa_df.apply(
         lambda row: gl_account_to_line_order.get(row['Gl Account'], row['Line Order']) if pd.isna(
             row['Line Order']) else row['Line Order'], axis=1)
-    #final_df = coupa_df[coupa_df['Vessel'] == 'MIA-009-07']
     coupa_df.drop(columns=['start_date', 'end_date', 'Gl Account'], inplace=True)
 
     ## mapping

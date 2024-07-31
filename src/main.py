@@ -9,48 +9,30 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-def pl_mapping(df):
+def map_pl_columns(df):
     df_mapping = pd.read_csv('static/line_order_mapping.csv')
-    df['pl_mapping_2'] = ''
-    df['pl_mapping_3'] = ''
-    df['pl_mapping_4'] = ''
-
-    line_item_dict_pl_2 = dict(zip(df_mapping['Line Order'], df_mapping['pl_mapping_2']))
-    df['pl_mapping_2'] = df['Line Order'].map(line_item_dict_pl_2)
-
-    line_item_dict_pl_3 = dict(zip(df_mapping['Line Order'], df_mapping['pl_mapping_3']))
-    df['pl_mapping_3'] = df['Line Order'].map(line_item_dict_pl_3)
-
-    line_item_dict_pl_4 = dict(zip(df_mapping['Line Order'], df_mapping['pl_mapping_4']))
-    df['pl_mapping_4'] = df['Line Order'].map(line_item_dict_pl_4)
-
-    df['pl_mapping_2'] = df['pl_mapping_2'].astype(str)
-    df['pl_mapping_3'] = df['pl_mapping_3'].astype(str)
-    df['pl_mapping_4'] = df['pl_mapping_4'].astype(str)
+    df['pl_mapping_2'] = df['Line Order'].map(dict(zip(df_mapping['Line Order'], df_mapping['pl_mapping_2'])))
+    df['pl_mapping_3'] = df['Line Order'].map(dict(zip(df_mapping['Line Order'], df_mapping['pl_mapping_3'])))
+    df['pl_mapping_4'] = df['Line Order'].map(dict(zip(df_mapping['Line Order'], df_mapping['pl_mapping_4'])))
+    df[['pl_mapping_2', 'pl_mapping_3', 'pl_mapping_4']] = df[['pl_mapping_2', 'pl_mapping_3', 'pl_mapping_4']].astype(str)
     return df
 
 
-def concat_dfs(df1, df2, df3):
-    #df1 = pd.read_csv("data/coupa.csv")
-    #df2 = pd.read_csv("data/pnl_orders.csv")
-    #df3 = pd.read_csv("data/statement.csv")
-
-    result = pd.concat([df1, df2, df3], ignore_index=True)
+def concat_dfs(*dfs):
+    result = pd.concat(dfs, ignore_index=True)
     result = result[result['Line Item'] != 'Commission Usd']
     result = result[result['Amount'] != 0]
-    #result.to_csv("data/gold/concat.csv", index=False)
     return result
 
 
-def eksi_ile_carp(df):
-    df2 = pd.read_csv('static/eksi-ile-carp.csv')
-    df2_filtered = df2[df2['Check'] == 'Yes']
-    line_orders_to_update = df2_filtered['Line Order'].unique()
-    df.loc[df['Line Order'].isin(line_orders_to_update), 'Amount'] *= -1
+def multiply_amount_by_negative(df):
+    df_negative = pd.read_csv('static/eksi-ile-carp.csv')
+    negative_line_orders = df_negative[df_negative['Check'] == 'Yes']['Line Order'].unique()
+    df.loc[df['Line Order'].isin(negative_line_orders), 'Amount'] *= -1
     return df
 
 
-def find_vessels_name(df):
+def update_unknown_vessels(df):
     unknown_vessels = df[df['Vessel Name'] == 'Unknown Vessel Name']
     for index, row in unknown_vessels.iterrows():
         matching_vessel = df[(df['Vessel'] == row['Vessel']) & (df['Vessel Name'] != 'Unknown Vessel Name')]
@@ -59,14 +41,13 @@ def find_vessels_name(df):
     return df
 
 
-def spread_labor(df):
+def distribute_labor_costs(df):
     df['Business Date Local'] = pd.to_datetime(df['Business Date Local']).dt.strftime('%Y-%m-%d')
     df['Business Date Local'] = pd.to_datetime(df['Business Date Local'])
     ### LABOR DAGITMA ###
     labor_mapping = pd.read_csv('static/labor_mapping.csv')
-    labor_mapping['Apr'] = labor_mapping['Apr'].str.replace(',', '').astype(float)
-    labor_mapping['May'] = labor_mapping['May'].str.replace(',', '').astype(float)
-    labor_mapping['Jun'] = labor_mapping['Jun'].str.replace(',', '').astype(float)
+    labor_mapping[['Apr', 'May', 'Jun']] = labor_mapping[['Apr', 'May', 'Jun']].replace(',', '', regex=True).astype(float)
+
 
     us_vessels = df[df['Country'] == 'US']
     ca_vessels = df[df['Country'] == 'CA']
@@ -98,7 +79,7 @@ def spread_labor(df):
             month_col = 'Jun'
         else:
             print(f"!!! MONTH BULUNAMADI !!! month: {month} | date local: {row['Business Date Local']}", )
-            month_col = ''
+            return df
 
         if len(df_country_spesific) > 0:
             for index_spesific, row_spesific in df_country_spesific.iterrows():
@@ -147,21 +128,17 @@ def spread_labor(df):
     return final_df
 
 
-def start(merged_df):
+def process_data(merged_df):
     merged_df['Vessel Name'] = merged_df['Vessel Name'].replace('', 'Unknown Vessel Name').fillna('Unknown Vessel Name')
     merged_df['Line Order'] = merged_df['Line Order'].replace('', 'Unnamed LineOrder').fillna('Unnamed LineOrder')
-    df = spread_labor(merged_df)
-    print("Labor spreaded")
-    df = find_vessels_name(df)
-    print("Vessels name found")
-    df = eksi_ile_carp(df)
-    print("Eksi ile carpildi")
-    df = pl_mapping(df)
-    print("PL Mapping done")
-    return df
+    merged_df = distribute_labor_costs(merged_df)
+    merged_df = update_unknown_vessels(merged_df)
+    merged_df = multiply_amount_by_negative(merged_df)
+    merged_df = map_pl_columns(merged_df)
+    return merged_df
 
 
-def get_all(yesterday_str):
+def retrieve_all_data(yesterday_str):
     df_coupa = start_coupa(yesterday_str, yesterday_str)
     print("len(df_coupa): ", len(df_coupa))
     df_pnl = start_pnl_orders(yesterday_str, yesterday_str)
@@ -172,7 +149,7 @@ def get_all(yesterday_str):
     merged_df = concat_dfs(df_coupa, df_pnl, df_statement)
     print("len(merged_df): ", len(merged_df))
 
-    final_df = start(merged_df)
+    final_df = process_data(merged_df)
     print("len(final_df): ", len(final_df))
     return final_df
 
@@ -183,5 +160,5 @@ if __name__ == "__main__":
     print("Started: ", yesterday_str)
     aws_manager = aws_manager.AWSManager()
 
-    df = get_all(yesterday_str)
+    df = retrieve_all_data(yesterday_str)
     aws_manager.insert_to_redshift(df)
