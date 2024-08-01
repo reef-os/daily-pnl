@@ -12,7 +12,7 @@ class AWSManager:
         if self.__session is None:
             #print(f"Getting AWS session with profile name: {self.__profile_name} and region name: {self.__region_name}")
             self.__session = boto3.session.Session(
-                profile_name=self.__profile_name,
+                #profile_name=self.__profile_name,
                 region_name=self.__region_name
             )
         return self.__session
