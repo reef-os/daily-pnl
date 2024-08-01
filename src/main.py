@@ -43,7 +43,6 @@ def update_unknown_vessels(df):
 
 
 def distribute_labor_costs(df):
-    df.to_csv('/Users/mertcelikan/PycharmProjects/daily-pnl/df.csv', index=False)
     df['Business Date Local'] = pd.to_datetime(df['Business Date Local']).dt.strftime('%Y-%m-%d')
     df['Business Date Local'] = pd.to_datetime(df['Business Date Local'])
     ### LABOR DAGITMA ###
@@ -157,6 +156,7 @@ def retrieve_all_data(start_date, end_date_str):
 
     merged_df = concat_dfs(df_coupa, df_pnl, df_statement)
     print("len(merged_df): ", len(merged_df))
+    merged_df.drop(columns=['is_ulysses'], inplace=True)
 
     final_df = process_data(merged_df)
     print("len(final_df): ", len(final_df))
@@ -174,13 +174,13 @@ if __name__ == "__main__":
     """    
     df_nisan = retrieve_all_data("2024-04-01", "2024-04-30")
     aws_manager.insert_to_redshift(df_nisan)
-    
+
     df_mayis = retrieve_all_data("2024-05-01", "2024-05-31")
     aws_manager.insert_to_redshift(df_mayis)
-    
+
     df_haziran = retrieve_all_data("2024-06-01", "2024-06-30")
     aws_manager.insert_to_redshift(df_haziran)
-    
+
     df_temmuz = retrieve_all_data("2024-07-01", "2024-07-31")
     aws_manager.insert_to_redshift(df_temmuz)
     """

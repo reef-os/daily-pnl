@@ -125,20 +125,20 @@ def start_pnl_orders(start_date_str, end_date_str):
 
     mapped_df = apply_mappings(grouped_df)
 
+
     df_with_marketplace_fee = apply_marketplace_fee(mapped_df)
     df_with_cwa_fee = apply_cwa_fee(df_with_marketplace_fee)
     df_with_food_purchases = apply_food_purchases(df_with_cwa_fee)
     df_with_l3_expenses = apply_l3_expenses(df_with_food_purchases)
     df_with_l3_expenses.drop(columns=['delivery_platform'], inplace=True)
 
+
     df_grouped = df_with_l3_expenses.groupby(
         ['Vessel', 'Vessel Name', 'Business Date Local', 'Country', 'Line Item', 'is_ulysses', 'Line Order'],
         as_index=False).agg({'Amount': 'sum'})
-
     df_without_commission_usd = drop_commisionusd_ulysses(df_grouped)
 
     adjusted_df = df_without_commission_usd.groupby(['Vessel', 'Vessel Name', 'Business Date Local'],
                                                     group_keys=False).apply(adjust_gross_sales_amount)
     final_df = adjusted_df[adjusted_df['Line Item'] != 'Vat Usd']
-    final_df.drop(columns=['is_ulysses'], inplace=True)
     return final_df

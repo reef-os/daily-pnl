@@ -22,5 +22,5 @@ def start_statement(start_date_str, end_date_str):
 
     line_item_dict = dict(zip(df_mapping['Line Order'], df_mapping['Line Item']))
     renamed_df['Line Item'] = renamed_df['Line Order'].map(line_item_dict)
-
+    renamed_df['is_ulysses'] = True
     return renamed_df

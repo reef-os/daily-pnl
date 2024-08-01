@@ -68,8 +68,7 @@ def start_coupa(start_date_str, end_date_str):
         'vessel name': 'Vessel Name',
     }
     df.rename(columns=column_name_mapping, inplace=True)
-    #print("df.columns: ", df.columns)
-    columns = ['Vessel', 'start_date', 'end_date', 'Line Item', 'Amount', 'Gl Account', 'Business Date Local', 'Vessel Name', 'Country']
+    columns = ['Vessel', 'start_date', 'end_date', 'Line Item', 'Amount', 'Gl Account', 'Business Date Local', 'Vessel Name', 'Country', 'is_ulysses']
     main_df = df[columns]
 
     ### TRANSFORM END ###
@@ -91,7 +90,7 @@ def start_coupa(start_date_str, end_date_str):
         'account_category': 'Line Item',
         'pnl_contribution_daily_usd_rounded': 'Amount',
         'country': 'Country',
-        'vessel name': 'Vessel Name',
+        'vessel name': 'Vessel Name'
     }
     corporate_df.rename(columns=column_name_mapping, inplace=True)
     corporate_df = corporate_df.groupby(['Vessel', 'expense_level', 'order_date', 'Line Item', 'Business Date Local'],as_index=False).agg({'Amount': 'sum'})
@@ -198,7 +197,7 @@ def start_coupa(start_date_str, end_date_str):
                     new_rows.append(new_row)
 
     rhq_spreaded_df = pd.concat([final_coupa_data, pd.DataFrame(new_rows)], ignore_index=True)
-
+    #print("rhq_spreaded_df.columns: ", rhq_spreaded_df.columns) # buraya kadar geldi is_ulysses
     coupa_df = rhq_spreaded_df[~rhq_spreaded_df['Vessel'].str.startswith('RHQ')]
     mapping_df = pd.read_csv('static/coupa-updated-mapping-gl.csv')
     gl_account_to_line_order = mapping_df.set_index('Gl Acount')['Line Order'].to_dict()
