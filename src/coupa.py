@@ -68,9 +68,8 @@ def start_coupa(start_date_str, end_date_str):
         'vessel name': 'Vessel Name',
     }
     df.rename(columns=column_name_mapping, inplace=True)
-
-    columns = ['Vessel', 'start_date', 'end_date', 'Line Item', 'Amount', 'Gl Account', 'Business Date Local',
-               'Vessel Name', 'Country']
+    #print("df.columns: ", df.columns)
+    columns = ['Vessel', 'start_date', 'end_date', 'Line Item', 'Amount', 'Gl Account', 'Business Date Local', 'Vessel Name', 'Country']
     main_df = df[columns]
 
     ### TRANSFORM END ###
@@ -79,8 +78,7 @@ def start_coupa(start_date_str, end_date_str):
     ### prepare corporate df
 
     first_account_type_idx = df_setted_country.columns.get_loc('account_type')
-    corporate_df = df_setted_country.loc[:, ~((df.columns == 'account_type') & (
-            df_setted_country.columns.duplicated(keep='first') | (
+    corporate_df = df_setted_country.loc[:, ~((df.columns == 'account_type') & (df_setted_country.columns.duplicated(keep='first') | (
             df_setted_country.columns.get_loc('account_type') != first_account_type_idx)))]
     corporate_df = corporate_df[corporate_df['account_type'] == 'REEF Corporate']
     corporate_df = corporate_df.dropna(subset=['account_category'])
@@ -96,8 +94,7 @@ def start_coupa(start_date_str, end_date_str):
         'vessel name': 'Vessel Name',
     }
     corporate_df.rename(columns=column_name_mapping, inplace=True)
-    corporate_df = corporate_df.groupby(['Vessel', 'expense_level', 'order_date', 'Line Item', 'Business Date Local'],
-                                        as_index=False).agg({'Amount': 'sum'})
+    corporate_df = corporate_df.groupby(['Vessel', 'expense_level', 'order_date', 'Line Item', 'Business Date Local'],as_index=False).agg({'Amount': 'sum'})
     mapping_dict = {
         '(-)SG&A - Profession': 'L6-01-01',
         '(-)SG&A - People Cos': 'L6-02-01',

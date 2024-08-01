@@ -98,7 +98,7 @@ def apply_mappings(df):
         'Refund Usd': 'L1-03',
         'Vat Usd': 'L1-04',
         'Net Sales Usd': 'L1-05',
-        'Commission Usd': 'L1-06',
+        'Commission Usd': 'L1-08',
         'Royalty Usd': 'L1-11-01'
     }
 

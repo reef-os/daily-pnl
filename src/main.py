@@ -14,7 +14,8 @@ def map_pl_columns(df):
     df['pl_mapping_2'] = df['Line Order'].map(dict(zip(df_mapping['Line Order'], df_mapping['pl_mapping_2'])))
     df['pl_mapping_3'] = df['Line Order'].map(dict(zip(df_mapping['Line Order'], df_mapping['pl_mapping_3'])))
     df['pl_mapping_4'] = df['Line Order'].map(dict(zip(df_mapping['Line Order'], df_mapping['pl_mapping_4'])))
-    df[['pl_mapping_2', 'pl_mapping_3', 'pl_mapping_4']] = df[['pl_mapping_2', 'pl_mapping_3', 'pl_mapping_4']].astype(str)
+    df[['pl_mapping_2', 'pl_mapping_3', 'pl_mapping_4']] = df[['pl_mapping_2', 'pl_mapping_3', 'pl_mapping_4']].astype(
+        str)
     return df
 
 
@@ -42,12 +43,14 @@ def update_unknown_vessels(df):
 
 
 def distribute_labor_costs(df):
+    df.to_csv('/Users/mertcelikan/PycharmProjects/daily-pnl/df.csv', index=False)
     df['Business Date Local'] = pd.to_datetime(df['Business Date Local']).dt.strftime('%Y-%m-%d')
     df['Business Date Local'] = pd.to_datetime(df['Business Date Local'])
     ### LABOR DAGITMA ###
     labor_mapping = pd.read_csv('static/labor_mapping.csv')
-    labor_mapping[['Apr', 'May', 'Jun']] = labor_mapping[['Apr', 'May', 'Jun']].replace(',', '', regex=True).astype(float)
-
+    labor_mapping[['Apr', 'May', 'Jun', 'Jul']] = labor_mapping[['Apr', 'May', 'Jun', 'Jul']].replace(',', '',
+                                                                                                      regex=True).astype(
+        float)
 
     us_vessels = df[df['Country'] == 'US']
     ca_vessels = df[df['Country'] == 'CA']
@@ -77,6 +80,8 @@ def distribute_labor_costs(df):
             month_col = 'May'
         elif month == 6:
             month_col = 'Jun'
+        elif month == 7:
+            month_col = 'Jul'
         else:
             print(f"!!! MONTH BULUNAMADI !!! month: {month} | date local: {row['Business Date Local']}", )
             return df
@@ -108,6 +113,8 @@ def distribute_labor_costs(df):
             month_col = 'May'
         elif month == 6:
             month_col = 'Jun'
+        elif month == 7:
+            month_col = 'Jul'
         else:
             print(f"!!! MONTH BULUNAMADI !!! month: {month} | date local: {row['Business Date Local']}", )
             month_col = ''
@@ -138,12 +145,14 @@ def process_data(merged_df):
     return merged_df
 
 
-def retrieve_all_data(yesterday_str):
-    df_coupa = start_coupa(yesterday_str, yesterday_str)
+def retrieve_all_data(start_date, end_date_str=None):
+    df_coupa = start_coupa(start_date, end_date_str)
     print("len(df_coupa): ", len(df_coupa))
-    df_pnl = start_pnl_orders(yesterday_str, yesterday_str)
+
+    df_pnl = start_pnl_orders(start_date, end_date_str)
     print("len(df_pnl): ", len(df_pnl))
-    df_statement = start_statement(yesterday_str, yesterday_str)
+
+    df_statement = start_statement(start_date, end_date_str)
     print("len(df_statement): ", len(df_statement))
 
     merged_df = concat_dfs(df_coupa, df_pnl, df_statement)
@@ -162,3 +171,16 @@ if __name__ == "__main__":
 
     df = retrieve_all_data(yesterday_str)
     aws_manager.insert_to_redshift(df)
+    """    
+    df_nisan = retrieve_all_data("2024-04-01", "2024-04-30")
+    aws_manager.insert_to_redshift(df_nisan)
+    
+    df_mayis = retrieve_all_data("2024-05-01", "2024-05-31")
+    aws_manager.insert_to_redshift(df_mayis)
+    
+    df_haziran = retrieve_all_data("2024-06-01", "2024-06-30")
+    aws_manager.insert_to_redshift(df_haziran)
+    
+    df_temmuz = retrieve_all_data("2024-07-01", "2024-07-31")
+    aws_manager.insert_to_redshift(df_temmuz)
+    """
