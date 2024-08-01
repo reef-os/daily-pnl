@@ -145,7 +145,7 @@ def process_data(merged_df):
     return merged_df
 
 
-def retrieve_all_data(start_date, end_date_str=None):
+def retrieve_all_data(start_date, end_date_str):
     df_coupa = start_coupa(start_date, end_date_str)
     print("len(df_coupa): ", len(df_coupa))
 
@@ -169,7 +169,7 @@ if __name__ == "__main__":
     print("Started: ", yesterday_str)
     aws_manager = aws_manager.AWSManager()
 
-    df = retrieve_all_data(yesterday_str)
+    df = retrieve_all_data(yesterday_str, yesterday_str)
     aws_manager.insert_to_redshift(df)
     """    
     df_nisan = retrieve_all_data("2024-04-01", "2024-04-30")
