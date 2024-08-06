@@ -21,7 +21,7 @@ def map_pl_columns(df):
 
 def concat_dfs(*dfs):
     result = pd.concat(dfs, ignore_index=True)
-    result = result[result['Line Item'] != 'Commission Usd']
+    #result = result[result['Line Item'] != 'Commission Usd']
     result = result[result['Amount'] != 0]
     return result
 
@@ -47,8 +47,9 @@ def distribute_labor_costs(df):
     df['Business Date Local'] = pd.to_datetime(df['Business Date Local'])
     ### LABOR DAGITMA ###
     labor_mapping = pd.read_csv('static/labor_mapping.csv')
-    labor_mapping[['Apr', 'May', 'Jun', 'Jul']] = labor_mapping[['Apr', 'May', 'Jun', 'Jul']].replace(',', '',
-                                                                                                      regex=True).astype(
+    labor_mapping[['Apr', 'May', 'Jun', 'Jul', 'Aug']] = labor_mapping[['Apr', 'May', 'Jun', 'Jul', 'Aug']].replace(',',
+                                                                                                                    '',
+                                                                                                                    regex=True).astype(
         float)
 
     us_vessels = df[df['Country'] == 'US']
@@ -81,21 +82,34 @@ def distribute_labor_costs(df):
             month_col = 'Jun'
         elif month == 7:
             month_col = 'Jul'
+        elif month == 8:
+            month_col = 'Aug'
         else:
             print(f"!!! MONTH BULUNAMADI !!! month: {month} | date local: {row['Business Date Local']}", )
             return df
-
         if len(df_country_spesific) > 0:
             for index_spesific, row_spesific in df_country_spesific.iterrows():
-                new_row = row.copy()
-                new_row['Vessel'] = row['Vessel']
-                new_row['Vessel Name'] = row['Vessel Name']
-                new_row['Business Date Local'] = row['Business Date Local']
-                new_row['Country'] = row['Country']
-                new_row['Line Item'] = row_spesific['Line_Item']
-                new_row['Amount'] = int(row_spesific[month_col]) / country_vessel_counts[row['Country']]
-                new_row['Line Order'] = row_spesific['Line_Order']
-                new_rows.append(new_row)
+                if row_spesific['Line_Item'] != 'L1 Labor':
+                    new_row = row.copy()
+                    new_row['Vessel'] = row['Vessel']
+                    new_row['Vessel Name'] = row['Vessel Name']
+                    new_row['Business Date Local'] = row['Business Date Local']
+                    new_row['Country'] = row['Country']
+                    new_row['Line Item'] = row_spesific['Line_Item']
+                    new_row['Amount'] = int(row_spesific[month_col]) / country_vessel_counts[row['Country']]
+                    new_row['Line Order'] = row_spesific['Line_Order']
+                    new_rows.append(new_row)
+                else:
+                    if not row['is_ulysses']:
+                        new_row = row.copy()
+                        new_row['Vessel'] = row['Vessel']
+                        new_row['Vessel Name'] = row['Vessel Name']
+                        new_row['Business Date Local'] = row['Business Date Local']
+                        new_row['Country'] = row['Country']
+                        new_row['Line Item'] = row_spesific['Line_Item']
+                        new_row['Amount'] = int(row_spesific[month_col]) / country_vessel_counts[row['Country']]
+                        new_row['Line Order'] = row_spesific['Line_Order']
+                        new_rows.append(new_row)
 
     ### GLOBAL  DAGITMA ###
     unique_vessel_names_list = df_unique['Vessel'].unique().tolist()
@@ -114,6 +128,8 @@ def distribute_labor_costs(df):
             month_col = 'Jun'
         elif month == 7:
             month_col = 'Jul'
+        elif month == 8:
+            month_col = 'Aug'
         else:
             print(f"!!! MONTH BULUNAMADI !!! month: {month} | date local: {row['Business Date Local']}", )
             month_col = ''
@@ -134,14 +150,22 @@ def distribute_labor_costs(df):
     return final_df
 
 
-def process_data(merged_df):
-    merged_df['Vessel Name'] = merged_df['Vessel Name'].replace('', 'Unknown Vessel Name').fillna('Unknown Vessel Name')
-    merged_df['Line Order'] = merged_df['Line Order'].replace('', 'Unnamed LineOrder').fillna('Unnamed LineOrder')
-    merged_df = distribute_labor_costs(merged_df)
-    merged_df = update_unknown_vessels(merged_df)
-    merged_df = multiply_amount_by_negative(merged_df)
-    merged_df = map_pl_columns(merged_df)
-    return merged_df
+def process_data(df):
+    df['Vessel Name'] = df['Vessel Name'].replace('', 'Unknown Vessel Name').fillna('Unknown Vessel Name')
+    df['Line Order'] = df['Line Order'].replace('', 'Unnamed LineOrder').fillna('Unnamed LineOrder')
+    df = df[df['Line Order'] != 'Unnamed LineOrder']
+    df = distribute_labor_costs(df)
+    print("Labor costs distributed")
+    df = update_unknown_vessels(df)
+    print("Unknown vessels updated")
+    df = multiply_amount_by_negative(df)
+    print("Amounts multiplied by negative")
+    df = map_pl_columns(df)
+    print("PL columns mapped")
+    df['Region'] = df['Country'].apply(map_region)
+    df = distrubute_reef_commission_expense(df)
+    print("Reef commission expense distributed")
+    return df
 
 
 def retrieve_all_data(start_date, end_date_str):
@@ -156,10 +180,109 @@ def retrieve_all_data(start_date, end_date_str):
 
     merged_df = concat_dfs(df_coupa, df_pnl, df_statement)
     print("len(merged_df): ", len(merged_df))
-    merged_df.drop(columns=['is_ulysses'], inplace=True)
 
     final_df = process_data(merged_df)
     print("len(final_df): ", len(final_df))
+    return final_df
+
+
+def map_region(country):
+    region_mapping = {
+        'NA': ['US', 'CA'],
+        'MENA': ['AE']
+    }
+    for region, countries in region_mapping.items():
+        if country in countries:
+            return region
+    return 'EU'
+
+
+def distrubute_adjustment_nisan(df):
+    df_adjustment = pd.read_csv(
+        '/Users/mertcelikan/PycharmProjects/daily-pnl/daily-pnl/src/static/adjustments_nisan.csv')
+    start_date = datetime(2024, 4, 1)
+    end_date = datetime(2024, 4, 30)
+    new_rows = []
+    for index, row in df_adjustment.iterrows():
+        current_date = start_date
+        while current_date <= end_date:
+            new_row = row.copy()
+            new_row['Vessel'] = 'Adjustment'
+            new_row['Line Item'] = ''
+            new_row['Amount'] = row['Amount'] / 30
+            new_row['Business Date Local'] = current_date
+            new_row['Vessel Name'] = 'Adjustment'
+            new_row['Country'] = ''
+            new_row['is_ulysses'] = ''
+            new_row['Line Order'] = row['Line Order']
+            new_row['pl_mapping_2'] = ''
+            new_row['pl_mapping_3'] = ''
+            new_row['pl_mapping_4'] = ''
+            new_row['Region'] = row['Region']
+            new_rows.append(new_row)
+            current_date += timedelta(days=1)
+    final_df = pd.concat([df, pd.DataFrame(new_rows)], ignore_index=True)
+    return final_df
+
+
+def distrubute_adjustment_mayis(df):
+    df_adjustment = pd.read_csv(
+        '/Users/mertcelikan/PycharmProjects/daily-pnl/daily-pnl/src/static/adjustments_mayis.csv')
+    start_date = datetime(2024, 5, 1)
+    end_date = datetime(2024, 5, 31)
+    new_rows = []
+    for index, row in df_adjustment.iterrows():
+        current_date = start_date
+        while current_date <= end_date:
+            new_row = row.copy()
+            new_row['Vessel'] = 'Adjustment'
+            new_row['Line Item'] = ''
+            new_row['Amount'] = row['Amount'] / 31
+            new_row['Business Date Local'] = current_date
+            new_row['Vessel Name'] = 'Adjustment'
+            new_row['Country'] = ''
+            new_row['is_ulysses'] = ''
+            new_row['Line Order'] = row['Line Order']
+            new_row['pl_mapping_2'] = ''
+            new_row['pl_mapping_3'] = ''
+            new_row['pl_mapping_4'] = ''
+            new_row['Region'] = row['Region']
+            new_rows.append(new_row)
+            current_date += timedelta(days=1)
+    final_df = pd.concat([df, pd.DataFrame(new_rows)], ignore_index=True)
+    return final_df
+
+
+def distrubute_reef_commission_expense(df):
+    # TODO (net sales)  + (commmison usd) - (marketplace fee) + (royalty usd) - (bütün statementda charged to uklysessler)
+    # NİSAN MAYISA DOKUNMA
+    new_rows = []
+    df_ulysses = df[df['is_ulysses']]
+    df_unique_ = df_ulysses.drop_duplicates(subset=['Vessel', 'Business Date Local'])
+    df_unique = df_unique_.sort_values(by=['Vessel', 'Business Date Local'])
+
+    for index, row in df_unique.iterrows():
+        df_filtered = df_ulysses[
+            (df_ulysses['Business Date Local'] == row['Business Date Local']) & (df_ulysses['Vessel'] == row['Vessel'])]
+
+        net_sales_amount = df_filtered[df_filtered['Line Order'] == 'L1-05']['Amount'].sum() if not df_filtered[
+            df_filtered['Line Order'] == 'L1-05'].empty else 0
+        commission_usd_amount = df_filtered[df_filtered['Line Order'] == 'L1-08']['Amount'].sum() if not df_filtered[
+            df_filtered['Line Order'] == 'L1-08'].empty else 0
+        marketplace_fee_amount = df_filtered[df_filtered['Line Order'] == 'L1-06']['Amount'].sum() if not df_filtered[
+            df_filtered['Line Order'] == 'L1-06'].empty else 0
+        royalty_usd_amount = df_filtered[df_filtered['Line Order'] == 'L1-11-01']['Amount'].sum() if not df_filtered[
+            df_filtered['Line Order'] == 'L1-11-01'].empty else 0
+
+        charged_to_ulysses = df_filtered[df_filtered['pl_mapping_3'] == '(+)charges to Ulysses']['Amount'].sum()
+        new_amount = net_sales_amount + commission_usd_amount - marketplace_fee_amount + royalty_usd_amount - charged_to_ulysses
+        new_row = row.copy()
+        new_row['Line Item'] = "Reef Commission Expense"
+        new_row['Amount'] = new_amount * -1
+        new_row['Line Order'] = 'L1-15'
+        new_rows.append(new_row)
+    final_df = pd.concat([df, pd.DataFrame(new_rows)], ignore_index=True)
+
     return final_df
 
 
@@ -167,20 +290,24 @@ if __name__ == "__main__":
     yesterday = datetime.today() - timedelta(days=1)
     yesterday_str = yesterday.strftime('%Y-%m-%d')
     print("Started: ", yesterday_str)
+
     aws_manager = aws_manager.AWSManager()
-
-    df = retrieve_all_data(yesterday_str, yesterday_str)
+    df = retrieve_all_data(yesterday_str,yesterday_str)
     aws_manager.insert_to_redshift(df)
-    """    
-    df_nisan = retrieve_all_data("2024-04-01", "2024-04-30")
-    aws_manager.insert_to_redshift(df_nisan)
 
-    df_mayis = retrieve_all_data("2024-05-01", "2024-05-31")
-    aws_manager.insert_to_redshift(df_mayis)
+    """
+    ### ADJUSMENTS ###
+    df_nisan = pd.read_csv('/Users/mertcelikan/PycharmProjects/daily-pnl/daily-pnl/src/nisan.csv')
+    df_mayis = pd.read_csv('/Users/mertcelikan/PycharmProjects/daily-pnl/daily-pnl/src/mayis.csv')
+    nisan_mayis_result = pd.concat([df_nisan, df_mayis], ignore_index=True)
+    nisan_mayis_result['Region'] = nisan_mayis_result['Country'].apply(map_region)
 
-    df_haziran = retrieve_all_data("2024-06-01", "2024-06-30")
-    aws_manager.insert_to_redshift(df_haziran)
-
-    df_temmuz = retrieve_all_data("2024-07-01", "2024-07-31")
-    aws_manager.insert_to_redshift(df_temmuz)
+    nisan_adjustment_mayis_result = distrubute_adjustment_nisan(nisan_mayis_result)
+    nisan_adjustment_mayis_adjustment_result = distrubute_adjustment_mayis(nisan_adjustment_mayis_result)
+    nisan_adjustment_mayis_adjustment_result = nisan_adjustment_mayis_adjustment_result[nisan_adjustment_mayis_adjustment_result['Amount'] != 0]
+    nisan_adjustment_mayis_adjustment_result = nisan_adjustment_mayis_adjustment_result.drop(['Month'], axis=1)
+    nisan_adjustment_mayis_adjustment_result.loc[nisan_adjustment_mayis_adjustment_result['Region'].isnull(), 'Region'] = 'NA'
+    nisan_adjustment_mayis_adjustment_result['Business Date Local'] = pd.to_datetime(nisan_adjustment_mayis_adjustment_result['Business Date Local'])
+    nisan_adjustment_mayis_adjustment_result['Business Date Local'] = nisan_adjustment_mayis_adjustment_result['Business Date Local'].dt.strftime('%Y-%m-%d')
+    nisan_adjustment_mayis_adjustment_result.to_csv('nisan_mayis_adjusted.csv', index=False)
     """

@@ -21,7 +21,7 @@ class AWSManager:
         session = self.get_aws_session()
         secret_name = "/timemachine/dev/datawarehouse/credentials"
         schema = 'finance'
-        table_name = 'daily_pnl'
+        table_name = 'daily_pnl_v2'
 
         conn = wr.redshift.connect(
             secret_id=secret_name,
