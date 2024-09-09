@@ -1,0 +1,42 @@
+Line Order,Main Line Order,Line Item,pl_mapping_2,pl_mapping_3,pl_mapping_4,Region,Month,Percentage
+L1-01-01,L1-01,Gross Sales,Adjustment,Adjustment,Adjustment,NA,Jun'24,0.033900015
+L1-02-01,L1-02,Discount,Adjustment,Adjustment,Adjustment,NA,Jun'24,-0.003039335
+L1-03-01,L1-03,Refund,Adjustment,Adjustment,Adjustment,NA,Jun'24,0.007179714
+L1-08-01,L1-08,GTM,Adjustment,Adjustment,Adjustment,NA,Jun'24,0.023146111
+L1-10-01-01,L1-10-01,L1 Expenses,1. Residual Rent,(-)Paid to Landlord for used space,Adjustment,NA,Jun'24,-0.000163697
+L1-11-01-01,L1-11-01,L1 Expenses,2. Residual Content Royalty,(-)Paid to Content Providers,Adjustment,NA,Jun'24,-0.003125393
+L1-12-01-01,L1-12-01,L1 Expenses,3. Residual Utilities and R&M,(-)Paid to Vendors,Adjustment,NA,Jun'24,0.005717137
+L1-13-01-01,L1-13-01,L1 Expenses,4.Other,(-)Paid to Vendors,Adjustment,NA,Jun'24,0.008717736
+L1-14-01-01,L1-14-01,L1 Expenses,(-)Labor Cost,Adjustment,Adjustment,NA,Jun'24,0.025756366
+L1-15-01,L1-15,L1 Expenses,(-)Reef Commission Expense,Adjustment,Adjustment,NA,Jun'24,-0.047263657
+L2-01-01-01,L2-01-01,L2 Expenses,1. Residual Site Service,(-)Paid to Vendors,Adjustment,NA,Jun'24,-0.039228639
+L3-01-01-01,L3-01-01,L3 Expenses,"1. UG Costs , net",(-)Food Purchases,Adjustment,NA,Jun'24,-0.068276307
+L3-01-02-01,L3-01-02,L3 Expenses,"1. UG Costs , net",(-)Rent,Adjustment,NA,Jun'24,0.049910125
+L3-01-04-01,L3-01-04,L3 Expenses,"1. UG Costs , net",(-)Utilities and R&M,Adjustment,NA,Jun'24,-0.012630647
+L3-01-05-01,L3-01-05,L3 Expenses,"1. UG Costs , net",(-)Other,Adjustment,NA,Jun'24,-0.005328096
+L3-02-01-01,L3-02-01,L3 Expenses,"2. MM Costs , net",(-)Vehicle Lease/Rent,Adjustment,NA,Jun'24,-0.052001905
+L3-02-02-01,L3-02-02,L3 Expenses,"2. MM Costs , net",(-)Labor costs,Adjustment,NA,Jun'24,-2.056E-05
+L3-02-03-01,L3-02-03,L3 Expenses,"2. MM Costs , net",(-)Fuel,Adjustment,NA,Jun'24,0.01286514
+L3-03-01-01,L3-03-01,L3 Expenses,3. Non People G&A,Adjustment,Adjustment,NA,Jun'24,0.001727818
+L3-03-02-01,L3-03-02,L3 Expenses,(-)Labor costs,Adjustment,Adjustment,NA,Jun'24,-1.43661E-05
+L4-01-01-01,L4-01-01,L4 Expenses,1. People G&A,Adjustment,Adjustment,NA,Jun'24,0.065400949
+L4-02-01-01,L4-02-01,L4 Expenses,2. Non People G&A,(-)Professional services,Adjustment,NA,Jun'24,0.188976144
+L4-03-06-01,L4-03-06,L4 Expenses,Non-recurring Costs,(-)Closing Other Cost,Adjustment,NA,Jun'24,-0.261780714
+L1-01-01,L1-01,Gross Sales,Adjustment,Adjustment,Adjustment,MENA,Jun'24,-0.004423982
+L1-02-01,L1-02,Discount,Adjustment,Adjustment,Adjustment,MENA,Jun'24,0.042487322
+L1-03-01,L1-03,Refund,Adjustment,Adjustment,Adjustment,MENA,Jun'24,-0.049961056
+L1-08-01,L1-08,GTM,Adjustment,Adjustment,Adjustment,MENA,Jun'24,-0.020196649
+L1-10-01-01,L1-10-01,L1 Expenses,1. Residual Rent,(-)Paid to Landlord for used space,Adjustment,MENA,Jun'24,-0.005334188
+L1-11-01-01,L1-11-01,L1 Expenses,2. Residual Content Royalty,(-)Paid to Content Providers,Adjustment,MENA,Jun'24,-0.004057535
+L1-12-01-01,L1-12-01,L1 Expenses,3. Residual Utilities and R&M,(-)Paid to Vendors,Adjustment,MENA,Jun'24,-0.002847585
+L1-13-01-01,L1-13-01,L1 Expenses,4.Other,(-)Paid to Vendors,Adjustment,MENA,Jun'24,-0.01405835
+L1-14-01-01,L1-14-01,L1 Expenses,(-)Labor Cost,Adjustment,Adjustment,MENA,Jun'24,-0.005693377
+L1-15-01,L1-15,L1 Expenses,(-)Reef Commission Expense,Adjustment,Adjustment,MENA,Jun'24,-0.051204956
+L2-01-01-01,L2-01-01,L2 Expenses,1. Residual Site Service,(-)Paid to Vendors,Adjustment,MENA,Jun'24,0.001198339
+L3-01-01-01,L3-01-01,L3 Expenses,"1. UG Costs , net",(-)Food Purchases,Adjustment,MENA,Jun'24,-0.075252843
+L3-01-04-01,L3-01-04,L3 Expenses,"1. UG Costs , net",(-)Utilities and R&M,Adjustment,MENA,Jun'24,-0.015027672
+L3-01-05-01,L3-01-05,L3 Expenses,"1. UG Costs , net",(-)Other,Adjustment,MENA,Jun'24,-0.00629038
+L3-02-02-01,L3-02-02,L3 Expenses,"2. MM Costs , net",(-)Labor costs,Adjustment,MENA,Jun'24,-1.22698E-05
+L3-02-03-01,L3-02-03,L3 Expenses,"2. MM Costs , net",(-)Fuel,Adjustment,MENA,Jun'24,0.023717616
+L4-01-01-01,L4-01-01,L4 Expenses,1. People G&A,Adjustment,Adjustment,MENA,Jun'24,-2.79262E-05
+L4-02-01-01,L4-02-01,L4 Expenses,2. Non People G&A,(-)Professional services,Adjustment,MENA,Jun'24,0.057782316
