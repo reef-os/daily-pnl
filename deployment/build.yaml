@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo "PRE-BUILD PHASE IS BEGINNING"
+      - ECR_REPOSITORY="daily-pnl"
+      - REGISTRY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
+      - IMAGE_NAME="${REGISTRY}/${ECR_REPOSITORY}"
+      - IMAGE_TAG="daily-pnl"
+      - echo "PRE-BUILD PHASE IS OVER"
+  build:
+    commands:
+      - echo "BUILD PHASE IS BEGINNING"
+      - aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
+      - aws ecr describe-repositories --repository-names ${ECR_REPOSITORY} || aws ecr create-repository --repository-name ${ECR_REPOSITORY}
+      - docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+      - echo "BUILD PHASE IS OVER"
+  post_build:
+    commands:
+      - echo "POST-BUILD IS BEGINNING"
+      - docker push ${IMAGE_NAME}:${IMAGE_TAG}
+      - echo "POST-BUILD IS OVER"
+artifacts:
+  files: '**.*'
