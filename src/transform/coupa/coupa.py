@@ -1,5 +1,5 @@
 import pandas as pd
-from src.extract.coupa_extractor import Extractor
+from extract.coupa_extractor import Extractor
 
 
 def clear_duplicate_rows(df):

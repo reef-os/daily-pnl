@@ -1,5 +1,5 @@
 import pandas as pd
-from src.extract.statement_extractor import Extractor
+from extract.statement_extractor import Extractor
 
 
 def start_statement(start_date_str, end_date_str):

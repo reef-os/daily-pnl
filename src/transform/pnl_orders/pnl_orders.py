@@ -1,5 +1,5 @@
 import pandas as pd
-from src.helpers.db_reader import DbReader
+from helpers.db_reader import DbReader
 
 
 def clear_df(df):

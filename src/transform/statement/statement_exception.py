@@ -1,5 +1,5 @@
 import numpy as np
-from src.helpers.db_reader import DbReader
+from helpers.db_reader import DbReader
 
 
 def get_statement_exceptions():

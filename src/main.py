@@ -44,11 +44,12 @@ def retrieve_all_data(start_date, end_date_str):
 
 
 if __name__ == "__main__":
+    my_date = "2024-09-02"
     yesterday = datetime.today() - timedelta(days=1)
     yesterday_str = yesterday.strftime('%Y-%m-%d')
     aws_manager = aws_manager.AWSManager()
 
-    df = retrieve_all_data(yesterday_str, yesterday_str)
+    df = retrieve_all_data(my_date, my_date)
 
-    processed_df = process_data(df, yesterday_str, yesterday_str)
+    processed_df = process_data(df, my_date, my_date)
     aws_manager.insert_to_redshift(processed_df)

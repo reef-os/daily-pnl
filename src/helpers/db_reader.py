@@ -1,6 +1,6 @@
 import pandas as pd
 import awswrangler as wr
-from src.helpers.aws_manager import AWSManager
+from helpers.aws_manager import AWSManager
 
 class DbReader:
     def __init__(self):
