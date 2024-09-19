@@ -10,7 +10,21 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/input/Input Jun'24.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/input/Input May'24.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/input/coupa_output_May.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -24,6 +38,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/input/coupa_output_jun.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/input/coupa_output_may.csv">
           <value>
             <Attribute>
@@ -31,49 +52,14 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/src/adjusment.csv">
+        <entry key="/src/adjusmentsiz_invoice_pnl.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="/src/before_adjusment.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/src/before_transform.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/src/coupa.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/src/final.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/src/pnl.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/src/statement.csv">
+        <entry key="/src/apr.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -81,6 +67,20 @@
           </value>
         </entry>
         <entry key="/src/static/adjusments/Apr Adjustments.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/src/static/adjusments/Jun Adjustments.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/src/static/adjusments/Jun,Jul,Aug Adjustment.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -123,34 +123,6 @@
           </value>
         </entry>
         <entry key="/src/test.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/src/transform/after_merge/after_adjusment.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/src/transform/after_merge/before_adjusment.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/src/transform/after_merge/only_adjusments.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/src/unique.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
