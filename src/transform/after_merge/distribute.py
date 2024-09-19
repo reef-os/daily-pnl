@@ -204,11 +204,12 @@ def distrubute_reef_commission_expense(df):
             df_filtered['Line Order'] == 'L1-08'].empty else 0
         marketplace_fee_amount = df_filtered[df_filtered['Line Order'] == 'L1-06']['Amount'].sum() if not df_filtered[
             df_filtered['Line Order'] == 'L1-06'].empty else 0
-        royalty_usd_amount = df_filtered[df_filtered['Line Order'] == 'L1-11-01']['Amount'].sum() if not df_filtered[
-            df_filtered['Line Order'] == 'L1-11-01'].empty else 0
 
-        charged_to_ulysses = df_filtered[df_filtered['pl_mapping_3'] == '(+)charges to Ulysses']['Amount'].sum()
-        new_amount = net_sales_amount + commission_usd_amount - marketplace_fee_amount + royalty_usd_amount - charged_to_ulysses
+        charged_to_ulysses = df_filtered[df_filtered['pl_mapping_3'] == '(+)charges to Ulysses']['Amount'].sum() if not df_filtered[
+            df_filtered['pl_mapping_3'] == '(+)charges to Ulysses'].empty else 0
+
+        #new_amount = net_sales_amount + commission_usd_amount - marketplace_fee_amount - (net_sales_amount * 0.05) - charged_to_ulysses
+        new_amount = net_sales_amount + commission_usd_amount - marketplace_fee_amount - charged_to_ulysses
         new_row = row.copy()
         new_row['Line Item'] = "L1 Expenses"
         new_row['Amount'] = new_amount * -1
@@ -217,6 +218,8 @@ def distrubute_reef_commission_expense(df):
         new_row['pl_mapping_3'] = 'nan'
         new_row['pl_mapping_4'] = 'nan'
         new_rows.append(new_row)
+        #if net_sales_amount != 0:
+            #print(f"Vessel: {row['Vessel']} | Date: {row['Business Date Local']} | new_row['Amount']: {new_row['Amount']} | net_sales_amount: {net_sales_amount} | commission_usd_amount: {commission_usd_amount} | marketplace_fee_amount: {marketplace_fee_amount} | charged_to_ulysses: {charged_to_ulysses}")
     final_df = pd.concat([df, pd.DataFrame(new_rows)], ignore_index=True)
     print("Reef commission expense distributed")
     return final_df

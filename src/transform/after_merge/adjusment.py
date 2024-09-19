@@ -57,8 +57,8 @@ def adjusment_with_percantage(df):
 
 def adjusment(df):
     print("1-first main (df): ", len(df))
-    adjusment_df = pd.read_csv(
-        'static/adjusments/Apr Adjustments.csv')
+    adjusment_df = pd.read_csv('static/adjusments/Jun Adjustments.csv')
+
     new_rows = []
     df_unique = df.drop_duplicates(subset=['Vessel', 'Business Date Local']).sort_values(
         by=['Vessel', 'Business Date Local'])

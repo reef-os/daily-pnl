@@ -13,7 +13,7 @@ def process_data(df, start_date_str, end_date_str):
     df = df[df['Line Order'] != 'Unnamed LineOrder']
     df = distribute_labor_costs(df)
     df = start_transform(df)
-    df = distrubute_reef_commission_expense(df)
+    #df = distrubute_reef_commission_expense(df)
     df = apply_statement_exceptions(df)
     df = add_new_line_item(df)
     df = df.groupby(['Vessel', 'Line Item', 'Business Date Local', 'Vessel Name', 'Country', 'is_ulysses', 'Line Order',

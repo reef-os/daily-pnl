@@ -7,16 +7,16 @@ L1-08-01,GTM,Adjustment,Adjustment,Adjustment,926.6256545,NA,May'24
 L1-09-01,L1 Expenses,(-)Food Purchases,Adjustment,Adjustment,2481.120265,NA,May'24
 L1-10-01-01,L1 Expenses,1. Residual Rent,(-)Paid to Landlord for used space,Adjustment,1138.703097,NA,May'24
 L1-11-01-01,L1 Expenses,2. Residual Content Royalty,(-)Paid to Content Providers,Adjustment,-87.72440871,NA,May'24
-L1-12-01-01,L1 Expenses,3. Residual Utilities and R&M,(-)Paid to Vendors,Adjustment,1876.017737,NA,May'24
+L1-12-01-01,L1 Expenses,3. Residual Utilities and R&M,(-)Paid to Vendors,Adjustment,809.9092983,NA,May'24
 L1-13-01-01,L1 Expenses,4.Other,(-)Paid to Vendors,Adjustment,-63.48637597,NA,May'24
 L1-14-01-01,L1 Expenses,(-)Labor Cost,Adjustment,Adjustment,965.4392391,NA,May'24
-L1-15-01,L1 Expenses,(-)Reef Commission Expense,Adjustment,Adjustment,-2747.346121,NA,May'24
+L1-15-01,L1 Expenses,(-)Reef Commission Expense,Adjustment,Adjustment,-214.1319823,NA,May'24
 L2-01-01-01,L2 Expenses,1. Residual Site Service,(-)Paid to Vendors,Adjustment,228.8797631,NA,May'24
 L3-01-01-01,L3 Expenses,"1. UG Costs , net",(-)Food Purchases,Adjustment,1537.275413,NA,May'24
 L3-01-02-01,L3 Expenses,"1. UG Costs , net",(-)Rent,Adjustment,1271.32202,NA,May'24
 L3-01-04-01,L3 Expenses,"1. UG Costs , net",(-)Utilities and R&M,Adjustment,-383.3994293,NA,May'24
 L3-01-05-01,L3 Expenses,"1. UG Costs , net",(-)Other,Adjustment,-14.07093203,NA,May'24
-L3-02-01-01,L3 Expenses,"2. MM Costs , net",(-)Vehicle Lease/Rent,Adjustment,6057.579355,NA,May'24
+L3-02-01-01,L3 Expenses,"2. MM Costs , net",(-)Vehicle Lease/Rent,Adjustment,4551.342903,NA,May'24
 L3-02-02-01,L3 Expenses,"2. MM Costs , net",(-)Labor costs,Adjustment,-1.167529032,NA,May'24
 L3-02-03-01,L3 Expenses,"2. MM Costs , net",(-)Fuel,Adjustment,497.0640028,NA,May'24
 L3-02-04-01,L3 Expenses,"2. MM Costs , net",(-)Other,Adjustment,-1516.988387,NA,May'24
@@ -26,20 +26,20 @@ L4-01-01-01,L4 Expenses,1. People G&A,Adjustment,Adjustment,2664.490325,NA,May'2
 L4-02-01-01,L4 Expenses,2. Non People G&A,(-)Professional services,Adjustment,-3503.990121,NA,May'24
 L4-03-06-01,L4 Expenses,Non-recurring Costs,(-)Closing Other Cost,Adjustment,-12026.9754,NA,May'24
 L3-04,L3 Expenses,One-Time,One-Time,One-Time,-1764.746277,NA,May'24
-L1-01-01,Gross Sales,Adjustment,Adjustment,Adjustment,-1358.968055,EU,May'24
+L1-01-01,Gross Sales,Adjustment,Adjustment,Adjustment,-1380.645475,EU,May'24
 L1-01-03-01,Gross Sales,SaaS - Revenue,SaaS - Revenue,SaaS - Revenue,-65.20556742,EU,May'24
-L1-02-01,Discount,Adjustment,Adjustment,Adjustment,-35.19075684,EU,May'24
-L1-03-01,Refund,Adjustment,Adjustment,Adjustment,196.4287437,EU,May'24
-L1-08-01,GTM,Adjustment,Adjustment,Adjustment,601.8841661,EU,May'24
-L1-09-01,L1 Expenses,(-)Food Purchases,Adjustment,Adjustment,-2475.870889,EU,May'24
+L1-02-01,Discount,Adjustment,Adjustment,Adjustment,-40.91599877,EU,May'24
+L1-03-01,Refund,Adjustment,Adjustment,Adjustment,196.753905,EU,May'24
+L1-08-01,GTM,Adjustment,Adjustment,Adjustment,572.2261016,EU,May'24
+L1-09-01,L1 Expenses,(-)Food Purchases,Adjustment,Adjustment,-2504.172501,EU,May'24
 L1-10-01-01,L1 Expenses,1. Residual Rent,(-)Paid to Landlord for used space,Adjustment,2735.938057,EU,May'24
-L1-11-01-01,L1 Expenses,2. Residual Content Royalty,(-)Paid to Content Providers,Adjustment,-219.6721253,EU,May'24
+L1-11-01-01,L1 Expenses,2. Residual Content Royalty,(-)Paid to Content Providers,Adjustment,-223.7495446,EU,May'24
 L1-12-01-01,L1 Expenses,3. Residual Utilities and R&M,(-)Paid to Vendors,Adjustment,-133.4175824,EU,May'24
 L1-13-01-01,L1 Expenses,4.Other,(-)Paid to Vendors,Adjustment,-315.2018024,EU,May'24
 L1-14-01-01,L1 Expenses,(-)Labor Cost,Adjustment,Adjustment,1063.033917,EU,May'24
-L1-15-01,L1 Expenses,(-)Reef Commission Expense,Adjustment,Adjustment,658.4617599,EU,May'24
+L1-15-01,L1 Expenses,(-)Reef Commission Expense,Adjustment,Adjustment,-138.4540374,EU,May'24
 L2-01-01-01,L2 Expenses,1. Residual Site Service,(-)Paid to Vendors,Adjustment,77.43602625,EU,May'24
-L3-01-01-01,L3 Expenses,"1. UG Costs , net",(-)Food Purchases,Adjustment,3897.62251,EU,May'24
+L3-01-01-01,L3 Expenses,"1. UG Costs , net",(-)Food Purchases,Adjustment,3877.245348,EU,May'24
 L3-01-04-01,L3 Expenses,"1. UG Costs , net",(-)Utilities and R&M,Adjustment,-1.46507523,EU,May'24
 L3-01-05-01,L3 Expenses,"1. UG Costs , net",(-)Other,Adjustment,29.21206451,EU,May'24
 L3-02-01-01,L3 Expenses,"2. MM Costs , net",(-)Vehicle Lease/Rent,Adjustment,100.2,EU,May'24
@@ -61,12 +61,14 @@ L1-11-01-01,L1 Expenses,2. Residual Content Royalty,(-)Paid to Content Providers
 L1-12-01-01,L1 Expenses,3. Residual Utilities and R&M,(-)Paid to Vendors,Adjustment,-176.9358323,MENA,May'24
 L1-13-01-01,L1 Expenses,4.Other,(-)Paid to Vendors,Adjustment,-654.1974065,MENA,May'24
 L1-14-01-01,L1 Expenses,(-)Labor Cost,Adjustment,Adjustment,-3852.061639,MENA,May'24
-L1-15-01,L1 Expenses,(-)Reef Commission Expense,Adjustment,Adjustment,4634.058018,MENA,May'24
+L1-15-01,L1 Expenses,(-)Reef Commission Expense,Adjustment,Adjustment,-4634.058018,MENA,May'24
 L2-01-01-01,L2 Expenses,1. Residual Site Service,(-)Paid to Vendors,Adjustment,-0.305967742,MENA,May'24
-L3-01-01-01,L3 Expenses,"1. UG Costs , net",(-)Food Purchases,Adjustment,7148.10771,MENA,May'24
+L3-01-01-01,L3 Expenses,"1. UG Costs , net",(-)Food Purchases,Adjustment,4198.882398,MENA,May'24
 L3-01-04-01,L3 Expenses,"1. UG Costs , net",(-)Utilities and R&M,Adjustment,-640.5179484,MENA,May'24
 L3-01-05-01,L3 Expenses,"1. UG Costs , net",(-)Other,Adjustment,-182.7137677,MENA,May'24
 L3-02-02-01,L3 Expenses,"2. MM Costs , net",(-)Labor costs,Adjustment,-0.659674194,MENA,May'24
 L3-02-03-01,L3 Expenses,"2. MM Costs , net",(-)Fuel,Adjustment,-12.80609355,MENA,May'24
-L4-01-01-01,L4 Expenses,1. People G&A,Adjustment,Adjustment,-0.678322581,MENA,May'24
-L4-02-01-01-01,L4 Expenses,2. Non People G&A,Non People G&A,Adjustment,-8831.113871,MENA,May'24
+L4-01-01-01,L4 Expenses,1. People G&A,Adjustment,Adjustment,2061.005428,MENA,May'24
+L4-02-01-01-01,L4 Expenses,2. Non People G&A,Non People G&A,Adjustment,-2939.693564,MENA,May'24
+L4-03-06,L4 Expenses,Non-recurring Costs,Adjustment,Adjustment,-7976.878156,MENA,May'24
+L1-09-01,L1 Expenses,(-)Food Purchases,Adjustment,Adjustment,11565.19622,MENA,May'24
