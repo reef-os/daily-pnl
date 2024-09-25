@@ -23,7 +23,7 @@ def distribute_labor_costs(df):
     df['Business Date Local'] = pd.to_datetime(df['Business Date Local'])
     ### LABOR DAGITMA ###
     labor_mapping = pd.read_csv('static/labor_mapping.csv')
-    labor_mapping[['Apr', 'May', 'Jun', 'Jul', 'Aug']] = labor_mapping[['Apr', 'May', 'Jun', 'Jul', 'Aug']].replace(',','',regex=True).astype(float)
+    labor_mapping[['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']] = labor_mapping[['Apr', 'May', 'Jun', 'Jul', 'Aug','Sep']].replace(',','',regex=True).astype(float)
     country_vessel_counts_by_date = date_by_date_vessel_unique_count(df)
     ulysses_false_counts_by_date = date_by_date_vessel_unique_count(df, is_ulysses=False)
 
@@ -45,6 +45,8 @@ def distribute_labor_costs(df):
             month_col = 'Jul'
         elif month == 8:
             month_col = 'Aug'
+        elif month == 9:
+            month_col = 'Sep'
         else:
             print(f"!!! MONTH BULUNAMADI !!! month: {month} | date local: {row['Business Date Local']}", )
             return df
@@ -108,6 +110,8 @@ def distribute_labor_costs(df):
             month_col = 'Jul'
         elif month == 8:
             month_col = 'Aug'
+        elif month == 9:
+            month_col = 'Sep'
         else:
             print(f"!!! MONTH BULUNAMADI !!! month: {month} | date local: {row['Business Date Local']}", )
             month_col = ''
